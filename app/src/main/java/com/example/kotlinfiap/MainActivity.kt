@@ -30,7 +30,7 @@ fun InitialScreen(){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Cyan)
+            .background(color = Color.Black)
     ) {
 
     }
