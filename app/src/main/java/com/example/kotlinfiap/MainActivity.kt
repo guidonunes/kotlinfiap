@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -36,7 +37,9 @@ fun InitialScreen(){
     ) {
         Image(
             painter = painterResource(R.drawable.bot),
-            contentDescription = "Astro Bot posing"
+            contentDescription = "Astro Bot posing",
+            modifier = Modifier
+                .align(alignment = Alignment.Center)
         )
 
     }
