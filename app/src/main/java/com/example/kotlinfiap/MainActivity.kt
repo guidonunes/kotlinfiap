@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,13 +36,16 @@ fun InitialScreen(){
             .fillMaxSize()
             .background(color = Color.Black)
     ) {
-        Image(
-            painter = painterResource(R.drawable.bot),
-            contentDescription = "Astro Bot posing",
+        Column(
             modifier = Modifier
-                .align(alignment = Alignment.Center)
-        )
-
+                .fillMaxSize()
+                .background(color = Color.Gray)
+        ){
+            Image(
+                painter = painterResource(R.drawable.bot),
+                contentDescription = "Astro Bot posing",
+            )
+        }
     }
 }
 
