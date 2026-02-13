@@ -18,8 +18,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -54,6 +59,19 @@ fun InitialScreen(){
             .fillMaxSize()
             .background(color = Color(0x9E000000))
     ) {
+        Card(
+            modifier = Modifier
+                .width(180.dp)
+                .height(90.dp)
+                .align(Alignment.TopEnd),
+            shape = RoundedCornerShape(
+                bottomStart = 85.dp
+            ),
+            colors = CardDefaults
+                .cardColors(
+                    containerColor = Color(0xFF4A5CBD)
+                )
+        ) {}
         Column(
             modifier = Modifier
                 .padding(16.dp)
@@ -133,6 +151,19 @@ fun InitialScreen(){
                 }
             }
         }
+        Card(
+            modifier = Modifier
+                .width(180.dp)
+                .height(90.dp)
+                .align(Alignment.BottomStart),
+            shape = RoundedCornerShape(
+                topEnd = 85.dp
+            ),
+            colors = CardDefaults
+                .cardColors(
+                    containerColor = Color(0xFF4A5CBD)
+                )
+        ) {}
     }
 }
 
