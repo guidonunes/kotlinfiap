@@ -11,6 +11,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -50,24 +51,26 @@ fun InitialScreen(){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Black)
+            .background(color = Color(0x65111111))
     ) {
         Column(
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxSize()
-                .background(color = Color.Gray)
+                .fillMaxWidth()
+                .align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally
         ){
             Image(
                 painter = painterResource(R.drawable.bot),
                 contentDescription = "Astro Bot posing",
+                modifier = Modifier
+                    .size(240.dp)
             )
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
-                    .background(color = Color.Green)
+
             ){
                 Text(
                     text = "THE GREATEST APP OF ALL TIME",
@@ -80,8 +83,11 @@ fun InitialScreen(){
                     fontSize = 64.sp,
                     lineHeight = 64.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = Color.White,
+                    modifier = Modifier
+                        .padding(top =12.dp, bottom = 12.dp)
                 )
+
                 Row{
                     Button(
                         onClick = {},
@@ -101,6 +107,8 @@ fun InitialScreen(){
                             fontSize = 16.sp
                         )
                     }
+                    Spacer(modifier = Modifier.width(8.dp))
+
                     Button(
                         onClick = {},
                         colors = ButtonDefaults
