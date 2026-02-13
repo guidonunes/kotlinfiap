@@ -29,6 +29,7 @@ import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,7 +52,7 @@ fun InitialScreen(){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0x65111111))
+            .background(color = Color(0x9E000000))
     ) {
         Column(
             modifier = Modifier
@@ -69,23 +70,25 @@ fun InitialScreen(){
 
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
 
             ){
                 Text(
                     text = "THE GREATEST APP OF ALL TIME",
                     fontSize = 16.sp,
-                    color = Color.Cyan,
+                    color = Color(0xFF4A5CBD),
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "Is Being Developed!",
-                    fontSize = 64.sp,
+                    text = "Is Under Development",
+                    fontSize = 54.sp,
                     lineHeight = 64.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
                     modifier = Modifier
-                        .padding(top =12.dp, bottom = 12.dp)
+                        .padding(top =14.dp, bottom = 18.dp),
+                    textAlign = TextAlign.Center
                 )
 
                 Row{
