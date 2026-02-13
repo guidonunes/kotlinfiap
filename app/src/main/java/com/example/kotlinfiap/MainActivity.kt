@@ -82,11 +82,17 @@ fun InitialScreen(){
                     Button(
                         onClick = {}
                     ) {
+                        Text(
+                            text = "Take Red Pill",
 
+                        )
                     }
                     Button(
                         onClick = {}
                     ) {
+                        Text(
+                            text = "Take Blue Pill"
+                        )
 
                     }
                 }
