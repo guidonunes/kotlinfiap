@@ -171,7 +171,7 @@ fun InitialScreen(){
             ),
             colors = CardDefaults
                 .cardColors(
-                    containerColor = Color(0xFF4A5CBD)
+                    containerColor = MaterialTheme.colorScheme.primary
                 )
         ) {}
     }
