@@ -126,7 +126,7 @@ fun InitialScreen(){
                             ),
                         border = BorderStroke(
                             width = 1.dp,
-                            color = Color(0xFFFFC107)
+                            color = MaterialTheme.colorScheme.onSurface
                         ),
 
                     ) {
@@ -147,7 +147,7 @@ fun InitialScreen(){
                             ),
                         border = BorderStroke(
                             width = 1.dp,
-                            color = Color(0xFFD2CECE)
+                            color = MaterialTheme.colorScheme.onSurface
                         ),
                     ) {
                         Text(
