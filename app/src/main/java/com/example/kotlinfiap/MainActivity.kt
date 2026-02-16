@@ -57,7 +57,7 @@ fun InitialScreen(){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0x9E000000))
+            .background(color = Color(0xF8070606))
     ) {
         Card(
             modifier = Modifier
@@ -71,6 +71,7 @@ fun InitialScreen(){
                 .cardColors(
                     containerColor = Color(0xFF4A5CBD)
                 )
+
         ) {}
         Column(
             modifier = Modifier
@@ -168,7 +169,7 @@ fun InitialScreen(){
 }
 
 @Composable
-@Preview
+@Preview(showSystemUi = true)
 fun InitialScreenPreview() {
     KotlinfiapTheme {
         InitialScreen()
