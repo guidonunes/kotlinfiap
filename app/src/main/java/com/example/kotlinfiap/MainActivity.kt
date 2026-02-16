@@ -1,5 +1,6 @@
 package com.example.kotlinfiap
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.telecom.Connection
 import androidx.activity.ComponentActivity
@@ -178,7 +179,10 @@ fun InitialScreen(){
 }
 
 @Composable
-@Preview(showSystemUi = true)
+@Preview(
+    showSystemUi = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 fun InitialScreenPreview() {
     KotlinfiapTheme {
         InitialScreen()
