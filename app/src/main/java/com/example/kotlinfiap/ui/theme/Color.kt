@@ -20,7 +20,7 @@ val LightOnPrimary = Color(0xFFFFFFFF)
 val LightOnSecondary = Color(0xFFFFFFFF)
 val LightOnBackground = Color(0xFF000000)
 val LightOnSurface = Color(0xFF000000)
-val LightTertiary = Color(0xFFFFD740)
+val LightTertiary = Color(0xFFF44336)
 val LightOnTertiary = Color(0xFF000000)
 
 // CORES DO TEMA ESCURO

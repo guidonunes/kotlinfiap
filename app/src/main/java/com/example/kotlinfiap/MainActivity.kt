@@ -111,7 +111,7 @@ fun InitialScreen(){
                     fontSize = 54.sp,
                     lineHeight = 64.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
                         .padding(top =14.dp, bottom = 18.dp),
                     textAlign = TextAlign.Center
@@ -122,7 +122,7 @@ fun InitialScreen(){
                         onClick = {},
                         colors = ButtonDefaults
                             .buttonColors(
-                                containerColor = Color(0xFFED1459)
+                                containerColor = MaterialTheme.colorScheme.tertiary
                             ),
                         border = BorderStroke(
                             width = 1.dp,
@@ -132,6 +132,7 @@ fun InitialScreen(){
                     ) {
                         Text(
                             text = "Take Red Pill",
+                            color = MaterialTheme.colorScheme.onPrimary,
                             fontWeight = FontWeight.Medium,
                             fontSize = 16.sp
                         )
@@ -142,7 +143,7 @@ fun InitialScreen(){
                         onClick = {},
                         colors = ButtonDefaults
                             .buttonColors(
-                                containerColor = Color(0xFF25327A)
+                                containerColor = MaterialTheme.colorScheme.primary
                             ),
                         border = BorderStroke(
                             width = 1.dp,
@@ -151,6 +152,7 @@ fun InitialScreen(){
                     ) {
                         Text(
                             text = "Take Blue Pill" ,
+                            color = MaterialTheme.colorScheme.onPrimary,
                             fontWeight = FontWeight.Medium,
                             fontSize = 16.sp
                         )
