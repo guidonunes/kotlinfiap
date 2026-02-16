@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KotlinfiapTheme {
-
+                InitialScreen()
             }
         }
     }
