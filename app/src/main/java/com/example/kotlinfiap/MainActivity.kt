@@ -25,6 +25,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -57,7 +58,11 @@ fun InitialScreen(){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0xF8070606))
+            .background(
+                color = MaterialTheme
+                    .colorScheme
+                    .background
+            )
     ) {
         Card(
             modifier = Modifier
@@ -69,7 +74,9 @@ fun InitialScreen(){
             ),
             colors = CardDefaults
                 .cardColors(
-                    containerColor = Color(0xFF4A5CBD)
+                    containerColor = MaterialTheme
+                        .colorScheme
+                        .primary
                 )
 
         ) {}
@@ -96,7 +103,7 @@ fun InitialScreen(){
                 Text(
                     text = "THE GREATEST APP OF ALL TIME",
                     fontSize = 16.sp,
-                    color = Color(0xFF4A5CBD),
+                    color = MaterialTheme.colorScheme.secondary,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
