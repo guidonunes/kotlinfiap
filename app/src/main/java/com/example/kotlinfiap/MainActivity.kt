@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -103,12 +104,12 @@ fun InitialScreen(){
 
             ){
                 Text(
-                    text = "THE GREATEST APP OF ALL TIME",
+                    text = stringResource(R.string.app_subtitle),
                     color = MaterialTheme.colorScheme.secondary,
                     style = MaterialTheme.typography.titleSmall
                 )
                 Text(
-                    text = "Is Under Development",
+                    text = stringResource(R.string.app_title),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
@@ -130,7 +131,7 @@ fun InitialScreen(){
 
                     ) {
                         Text(
-                            text = "Take Red Pill",
+                            text = stringResource(R.string.button_red_pill),
                             color = MaterialTheme.colorScheme.onPrimary,
                             style = MaterialTheme.typography.bodySmall
                         )
@@ -149,7 +150,7 @@ fun InitialScreen(){
                         ),
                     ) {
                         Text(
-                            text = "Take Blue Pill" ,
+                            text = stringResource(R.string.button_blue_pill) ,
                             color = MaterialTheme.colorScheme.onPrimary,
                             style = MaterialTheme.typography.bodySmall
                         )
