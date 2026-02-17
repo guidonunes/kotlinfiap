@@ -104,18 +104,12 @@ fun InitialScreen(){
             ){
                 Text(
                     text = "THE GREATEST APP OF ALL TIME",
-                    fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.secondary,
-                    fontFamily = poppinsFamily,
-                    fontWeight = FontWeight.SemiBold
-
+                    style = MaterialTheme.typography.titleSmall
                 )
                 Text(
                     text = "Is Under Development",
-                    fontSize = 48.sp,
-                    lineHeight = 64.sp,
-                    fontFamily = poppinsFamily,
-                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
                         .padding(top =14.dp, bottom = 18.dp),
@@ -138,9 +132,7 @@ fun InitialScreen(){
                         Text(
                             text = "Take Red Pill",
                             color = MaterialTheme.colorScheme.onPrimary,
-                            fontFamily = poppinsFamily,
-                            fontWeight = FontWeight.Normal,
-                            fontSize = 16.sp
+                            style = MaterialTheme.typography.bodySmall
                         )
                     }
                     Spacer(modifier = Modifier.width(8.dp))
@@ -159,9 +151,7 @@ fun InitialScreen(){
                         Text(
                             text = "Take Blue Pill" ,
                             color = MaterialTheme.colorScheme.onPrimary,
-                            fontFamily = poppinsFamily,
-                            fontWeight = FontWeight.Normal,
-                            fontSize = 16.sp
+                            style = MaterialTheme.typography.bodySmall
                         )
 
                     }
