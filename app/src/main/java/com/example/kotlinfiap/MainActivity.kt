@@ -41,6 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
+import com.example.kotlinfiap.ui.theme.poppinsFamily
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,12 +106,15 @@ fun InitialScreen(){
                     text = "THE GREATEST APP OF ALL TIME",
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.secondary,
-                    fontWeight = FontWeight.Bold
+                    fontFamily = poppinsFamily,
+                    fontWeight = FontWeight.SemiBold
+
                 )
                 Text(
                     text = "Is Under Development",
-                    fontSize = 54.sp,
+                    fontSize = 48.sp,
                     lineHeight = 64.sp,
+                    fontFamily = poppinsFamily,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
@@ -134,7 +138,8 @@ fun InitialScreen(){
                         Text(
                             text = "Take Red Pill",
                             color = MaterialTheme.colorScheme.onPrimary,
-                            fontWeight = FontWeight.Medium,
+                            fontFamily = poppinsFamily,
+                            fontWeight = FontWeight.Normal,
                             fontSize = 16.sp
                         )
                     }
@@ -154,7 +159,8 @@ fun InitialScreen(){
                         Text(
                             text = "Take Blue Pill" ,
                             color = MaterialTheme.colorScheme.onPrimary,
-                            fontWeight = FontWeight.Medium,
+                            fontFamily = poppinsFamily,
+                            fontWeight = FontWeight.Normal,
                             fontSize = 16.sp
                         )
 
