@@ -6,4 +6,6 @@
     <string name="button_sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="create_account">Create New Account</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="add_photo_icon">Add Photo Icon</string>
 </resources>
