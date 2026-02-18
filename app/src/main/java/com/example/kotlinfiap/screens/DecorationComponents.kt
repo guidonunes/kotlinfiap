@@ -16,7 +16,7 @@ import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 @Composable
 fun TopEndCard(modifier: Modifier = Modifier) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .width(180.dp)
             .height(90.dp),
         shape = RoundedCornerShape(

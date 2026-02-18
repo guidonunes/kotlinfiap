@@ -43,22 +43,7 @@ fun InitialScreen(){
                     .background
             )
     ) {
-        Card(
-            modifier = Modifier
-                .width(180.dp)
-                .height(90.dp)
-                .align(Alignment.TopEnd),
-            shape = RoundedCornerShape(
-                bottomStart = 85.dp
-            ),
-            colors = CardDefaults
-                .cardColors(
-                    containerColor = MaterialTheme
-                        .colorScheme
-                        .primary
-                )
-
-        ) {}
+        TopEndCard(modifier = Modifier.align(Alignment.TopEnd))
         Column(
             modifier = Modifier
                 .padding(16.dp)
