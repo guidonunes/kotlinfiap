@@ -1,13 +1,16 @@
 package com.example.kotlinfiap.screens
 
 import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -16,6 +19,8 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.RemoveRedEye
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -201,8 +206,28 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
 
                 )
             }
-
         )
+        Spacer(modifier = Modifier.width(32.dp))
+        Button(
+            onClick = {},
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = ButtonDefaults
+                .buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary
+                ),
+            border = BorderStroke(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.onSurface
+            ),
+
+            ) {
+            Text(
+                text = stringResource(R.string.button_sign_up),
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
     }
 }
 
