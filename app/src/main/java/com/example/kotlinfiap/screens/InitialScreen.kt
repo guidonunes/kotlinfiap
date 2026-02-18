@@ -92,7 +92,7 @@ fun InitialScreen(){
 
                         ) {
                         Text(
-                            text = stringResource(R.string.button_red_pill),
+                            text = stringResource(R.string.button_sign_up),
                             color = MaterialTheme.colorScheme.onPrimary,
                             style = MaterialTheme.typography.bodySmall
                         )
@@ -111,7 +111,7 @@ fun InitialScreen(){
                         ),
                     ) {
                         Text(
-                            text = stringResource(R.string.button_blue_pill) ,
+                            text = stringResource(R.string.button_sign_in) ,
                             color = MaterialTheme.colorScheme.onPrimary,
                             style = MaterialTheme.typography.bodySmall
                         )
