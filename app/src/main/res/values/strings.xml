@@ -2,6 +2,6 @@
     <string name="app_name">kotlinfiap</string>
     <string name="app_title">Is Under Development</string>
     <string name="app_subtitle">THE GREATEST APP OF ALL TIME</string>
-    <string name="button_red_pill">Take Red Pill</string>
-    <string name="button_blue_pill">Take Blue Pill</string>
+    <string name="button_red_pill">Sign Up</string>
+    <string name="button_blue_pill">Sign In</string>
 </resources>
