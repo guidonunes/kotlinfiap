@@ -120,19 +120,7 @@ fun InitialScreen(){
                 }
             }
         }
-        Card(
-            modifier = Modifier
-                .width(180.dp)
-                .height(90.dp)
-                .align(Alignment.BottomStart),
-            shape = RoundedCornerShape(
-                topEnd = 85.dp
-            ),
-            colors = CardDefaults
-                .cardColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                )
-        ) {}
+        BottomStartCard(modifier = Modifier.align(alignment = Alignment.BottomStart))
     }
 }
 
