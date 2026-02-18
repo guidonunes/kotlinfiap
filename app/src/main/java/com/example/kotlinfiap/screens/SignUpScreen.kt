@@ -5,12 +5,23 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddAPhoto
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Mail
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.RemoveRedEye
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -87,4 +98,118 @@ private fun ProfileImagePreview() {
         ProfileImage()
     }
     
+}
+
+@Composable
+fun SignUpUserForm(modifier: Modifier = Modifier) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(32.dp)
+    ) {
+        //Username input field
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            modifier = Modifier
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = stringResource(R.string.your_name),
+                    style = MaterialTheme.typography.labelSmall
+                )
+            },
+            shape = RoundedCornerShape(16.dp),
+            colors = OutlinedTextFieldDefaults.
+                colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
+                    focusedTextColor = MaterialTheme.colorScheme.primary,
+                    unfocusedTextColor = MaterialTheme.colorScheme.onBackground
+                ),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = stringResource(R.string.person_icon),
+                    tint = MaterialTheme.colorScheme.tertiary
+
+                )
+            }
+        )
+        // user email
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            modifier = Modifier
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = stringResource(R.string.your_email),
+                    style = MaterialTheme.typography.labelSmall
+                )
+            },
+            shape = RoundedCornerShape(16.dp),
+            colors = OutlinedTextFieldDefaults.
+            colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
+                focusedTextColor = MaterialTheme.colorScheme.primary,
+                unfocusedTextColor = MaterialTheme.colorScheme.onBackground
+            ),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Mail,
+                    contentDescription = stringResource(R.string.email_icon),
+                    tint = MaterialTheme.colorScheme.tertiary
+
+                )
+            }
+        )
+        //Password field
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            modifier = Modifier
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = stringResource(R.string.your_password),
+                    style = MaterialTheme.typography.labelSmall
+                )
+            },
+            shape = RoundedCornerShape(16.dp),
+            colors = OutlinedTextFieldDefaults.
+            colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
+                focusedTextColor = MaterialTheme.colorScheme.primary,
+                unfocusedTextColor = MaterialTheme.colorScheme.onBackground
+            ),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = stringResource(R.string.lock_icon),
+                    tint = MaterialTheme.colorScheme.tertiary
+
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.RemoveRedEye,
+                    contentDescription = stringResource(R.string.eye_icon),
+                    tint = MaterialTheme.colorScheme.tertiary
+
+                )
+            }
+
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun SignUpUserFormPreview() {
+    KotlinfiapTheme() {
+        SignUpUserForm()
+    }
 }
