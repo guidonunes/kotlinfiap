@@ -4,4 +4,6 @@
     <string name="app_subtitle">THE GREATEST APP OF ALL TIME</string>
     <string name="button_sign_up">Sign Up</string>
     <string name="button_sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_account">Create New Account</string>
 </resources>
