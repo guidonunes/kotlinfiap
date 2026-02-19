@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -54,11 +55,14 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         BottomStartCard(modifier = Modifier.align(alignment = Alignment.BottomStart))
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .align(alignment = Alignment.Center),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+
         ) {
             TitleComponent()
+            Spacer(modifier = Modifier.height(46.dp))
             ProfileImage()
             SignUpUserForm()
         }
@@ -86,12 +90,12 @@ fun TitleComponent(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(R.string.sign_up),
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.onTertiary,
             style = MaterialTheme.typography.titleLarge
         )
         Text(
             text = stringResource(R.string.create_account),
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.onTertiary,
             style = MaterialTheme.typography.titleSmall
         )
     }
@@ -124,7 +128,7 @@ fun ProfileImage(modifier: Modifier = Modifier) {
         Icon(
             imageVector = Icons.Default.AddAPhoto,
             contentDescription = stringResource(R.string.add_photo_icon),
-            tint = MaterialTheme.colorScheme.primary,
+            tint = MaterialTheme.colorScheme.tertiary,
             modifier = Modifier
                 .align(alignment = Alignment.BottomEnd)
         )
@@ -171,7 +175,7 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
                 Icon(
                     imageVector = Icons.Default.Person,
                     contentDescription = stringResource(R.string.person_icon),
-                    tint = MaterialTheme.colorScheme.tertiary
+                    tint = MaterialTheme.colorScheme.secondary
 
                 )
             }
@@ -200,7 +204,7 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
                 Icon(
                     imageVector = Icons.Default.Mail,
                     contentDescription = stringResource(R.string.email_icon),
-                    tint = MaterialTheme.colorScheme.tertiary
+                    tint = MaterialTheme.colorScheme.secondary
 
                 )
             }
@@ -229,7 +233,7 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
                 Icon(
                     imageVector = Icons.Default.Lock,
                     contentDescription = stringResource(R.string.lock_icon),
-                    tint = MaterialTheme.colorScheme.tertiary
+                    tint = MaterialTheme.colorScheme.secondary
 
                 )
             },
@@ -237,7 +241,7 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
                 Icon(
                     imageVector = Icons.Default.RemoveRedEye,
                     contentDescription = stringResource(R.string.eye_icon),
-                    tint = MaterialTheme.colorScheme.tertiary
+                    tint = MaterialTheme.colorScheme.secondary
 
                 )
             }

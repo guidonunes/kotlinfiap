@@ -26,7 +26,7 @@ fun TopEndCard(modifier: Modifier = Modifier) {
             .cardColors(
                 containerColor = MaterialTheme
                     .colorScheme
-                    .primary
+                    .secondary
             )
 
     ) {}
@@ -51,7 +51,7 @@ fun BottomStartCard(modifier: Modifier = Modifier) {
         ),
         colors = CardDefaults
             .cardColors(
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = MaterialTheme.colorScheme.secondary
             )
     ) {}
 }
