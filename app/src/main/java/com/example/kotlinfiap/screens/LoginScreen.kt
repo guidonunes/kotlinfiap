@@ -8,6 +8,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.RemoveRedEye
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -105,6 +107,45 @@ fun LogInForm(modifier: Modifier = Modifier) {
             )
 
         )
+        OutlinedTextField(
+            value="",
+            onValueChange = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(4.dp),
+            shape = RoundedCornerShape(16.dp),
+            colors = OutlinedTextFieldDefaults
+                .colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.primary
+                ),
+            label = {
+                Text(
+                    text = "Your Password",
+                    style = MaterialTheme.typography.labelSmall
+                )
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = "Lock icon",
+                    tint = MaterialTheme.colorScheme.secondary
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.RemoveRedEye,
+                    contentDescription = "Eye icon",
+                    tint = MaterialTheme.colorScheme.secondary
+                )
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Email,
+                imeAction = ImeAction.Done
+            )
+
+        )
+
     }
 }
 
