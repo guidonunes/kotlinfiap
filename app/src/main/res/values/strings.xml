@@ -15,4 +15,6 @@
     <string name="your_password">Your Password</string>
     <string name="lock_icon">Lock Icon</string>
     <string name="eye_icon">Eye Icon</string>
+    <string name="log_in">Log In</string>
+    <string name="login_greeting">Hello there! Glad to have you back</string>
 </resources>
