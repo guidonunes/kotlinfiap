@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -40,7 +41,24 @@ import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
 fun SignUpScreen(modifier: Modifier = Modifier) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
 
+    }
+}
+
+@Preview (
+    showBackground = true,
+    showSystemUi = true
+)
+@Composable
+private fun SignUpScreenPreview () {
+    KotlinfiapTheme {
+        SignUpScreen()
+    }
+    
 }
 
 @Composable
