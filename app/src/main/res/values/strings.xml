@@ -17,4 +17,7 @@
     <string name="eye_icon">Eye Icon</string>
     <string name="log_in">Log In</string>
     <string name="login_greeting">Hello there! Glad to have you back</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="your_password_login">Your Password</string>
+    <string name="your_email_login">Your Email</string>
 </resources>
