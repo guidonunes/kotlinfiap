@@ -52,6 +52,16 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
     ) {
         TopEndCard(modifier = Modifier.align(alignment = Alignment.TopEnd))
         BottomStartCard(modifier = Modifier.align(alignment = Alignment.BottomStart))
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(alignment = Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            TitleComponent()
+            ProfileImage()
+            SignUpUserForm()
+        }
     }
 }
 
@@ -232,7 +242,7 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
                 )
             }
         )
-        Spacer(modifier = Modifier.width(32.dp))
+        Spacer(modifier = Modifier.padding(32.dp))
         Button(
             onClick = {},
             modifier = Modifier
