@@ -9,11 +9,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -22,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,7 +46,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     ) {
         Scaffold(
             topBar = {MyTopAppBar()},
-            bottomBar = {},
+            bottomBar = {MyBottomAppBar()},
             floatingActionButton = {},
 
         ) { paddingValues ->
@@ -115,4 +124,53 @@ private fun MyTopAppBarPreview() {
     KotlinfiapTheme() {
         MyTopAppBar()
     }
+}
+
+data class BottomNavigationItem(
+    val title: String,
+    val icon: ImageVector
+)
+
+@Composable
+fun MyBottomAppBar(modifier: Modifier = Modifier) {
+    val items = listOf(
+        BottomNavigationItem("Home", icon = Icons.Default.Home),
+        BottomNavigationItem("Favorites", icon = Icons.Default.Favorite),
+        BottomNavigationItem("Profile", icon = Icons.Default.Person),
+    )
+
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.tertiary
+    ) {
+        items.forEach { item ->
+            NavigationBarItem(
+                selected = false,
+                onClick = {},
+                icon = {
+                    Icon(
+                        imageVector = item.icon,
+                        contentDescription = item.title,
+                        tint = MaterialTheme.colorScheme.onTertiary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                },
+                label = {
+                    Text(text = item.title,
+                         style = MaterialTheme.typography.displaySmall,
+                         color = MaterialTheme.colorScheme.onTertiary
+                    )
+                }
+            )
+        }
+    }
+}
+
+
+@Preview
+@Composable
+private fun MyBottomAppBarPreview() {
+    KotlinfiapTheme() {
+        MyBottomAppBar()
+    }
+    
 }
