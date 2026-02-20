@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.example.kotlinfiap.screens.HomeScreen
 import com.example.kotlinfiap.screens.InitialScreen
 import com.example.kotlinfiap.screens.LoginScreen
 import com.example.kotlinfiap.screens.SignUpScreen
@@ -17,9 +18,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KotlinfiapTheme {
-                InitialScreen()
+ //               InitialScreen()
 //                SignUpScreen()
 //                LoginScreen()
+                HomeScreen()
             }
         }
     }

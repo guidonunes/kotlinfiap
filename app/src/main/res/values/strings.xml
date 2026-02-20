@@ -20,4 +20,7 @@
     <string name="sign_in">SIGN IN</string>
     <string name="your_password_login">Your Password</string>
     <string name="your_email_login">Your Email</string>
+    <string name="search_game_by_title">Search game by title</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="genres">Genres</string>
 </resources>
