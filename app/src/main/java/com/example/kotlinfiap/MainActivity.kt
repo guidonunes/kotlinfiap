@@ -17,9 +17,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KotlinfiapTheme {
-//                InitialScreen()
+                InitialScreen()
 //                SignUpScreen()
-                LoginScreen()
+//                LoginScreen()
             }
         }
     }
