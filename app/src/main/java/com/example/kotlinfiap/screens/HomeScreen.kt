@@ -12,12 +12,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -47,7 +49,18 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         Scaffold(
             topBar = {MyTopAppBar()},
             bottomBar = {MyBottomAppBar()},
-            floatingActionButton = {},
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {},
+                    shape = CircleShape,
+                    containerColor = MaterialTheme.colorScheme.primary
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Add button"
+                    )
+                }
+            },
 
         ) { paddingValues ->
             Column(
