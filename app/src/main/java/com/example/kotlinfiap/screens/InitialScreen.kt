@@ -106,7 +106,10 @@ fun InitialScreen(navController: NavController){
                     Spacer(modifier = Modifier.width(8.dp))
 
                     Button(
-                        onClick = {},
+                        onClick = {
+                            navController
+                                .navigate(Destination.LoginScreen.route)
+                        },
                         colors = ButtonDefaults
                             .buttonColors(
                                 containerColor = MaterialTheme.colorScheme.primary

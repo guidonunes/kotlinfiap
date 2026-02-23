@@ -34,9 +34,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
+import com.example.kotlinfiap.navigation.Destination
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
@@ -58,7 +60,7 @@ fun LoginScreen(navController: NavHostController) {
         ) {
             LoginTitle()
             Spacer(modifier = Modifier.height(64.dp))
-            LogInForm()
+            LogInForm(navController)
         }
     }
 }
@@ -106,7 +108,7 @@ private fun LogInTitlePreview() {
 }
 
 @Composable
-fun LogInForm() {
+fun LogInForm(navController: NavController) {
     Column() {
         OutlinedTextField(
             value="",
@@ -210,7 +212,10 @@ fun LogInForm() {
                 color = MaterialTheme.colorScheme.onBackground
             )
             TextButton(
-                onClick = {}
+                onClick = {
+                    navController
+                        .navigate(Destination.SignUpScreen.route)
+                }
             ) {
                 Text(
                     text = stringResource(R.string.sign_up),
@@ -228,7 +233,7 @@ fun LogInForm() {
 @Composable
 private fun LogInFormPreview() {
     KotlinfiapTheme() {
-        LogInForm()
+        LogInForm(rememberNavController())
     }
     
 }
