@@ -17,7 +17,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
@@ -51,13 +50,13 @@ import com.example.kotlinfiap.R
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, email: String?) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Scaffold(
-            topBar = {MyTopAppBar()},
+            topBar = {MyTopAppBar(email!!)},
             bottomBar = {MyBottomAppBar()},
             floatingActionButton = {
                 FloatingActionButton(
@@ -87,13 +86,13 @@ fun HomeScreen(navController: NavController) {
 @Composable
 private fun HomeScreenPreview() {
     KotlinfiapTheme() {
-        HomeScreen(rememberNavController())
+        HomeScreen(rememberNavController(), "")
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTopAppBar(modifier: Modifier = Modifier) {
+fun MyTopAppBar(email: String) {
     TopAppBar(
         modifier = Modifier
             .fillMaxWidth(),
@@ -115,7 +114,7 @@ fun MyTopAppBar(modifier: Modifier = Modifier) {
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "johndoe@email.com",
+                        text = email,
                         style = MaterialTheme.typography.displaySmall
                     )
                 }
@@ -145,7 +144,7 @@ fun MyTopAppBar(modifier: Modifier = Modifier) {
 @Composable
 private fun MyTopAppBarPreview() {
     KotlinfiapTheme() {
-        MyTopAppBar()
+        MyTopAppBar("")
     }
 }
 
