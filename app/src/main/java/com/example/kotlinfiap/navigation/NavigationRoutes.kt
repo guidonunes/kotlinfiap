@@ -17,7 +17,7 @@ fun NavigationRoutes() {
         startDestination = Destination.InitialScreen.route
     ) {
         composable(Destination.InitialScreen.route){
-            InitialScreen()
+            InitialScreen(navController)
         }
         composable(Destination.HomeScreen.route) {
             HomeScreen()
@@ -26,7 +26,7 @@ fun NavigationRoutes() {
             SignUpScreen()
         }
         composable(Destination.LoginScreen.route) {
-            LoginScreen()
+            LoginScreen(navController)
         }
     }
 }
