@@ -199,7 +199,12 @@ fun LogInForm(navController: NavController) {
         )
         Spacer(modifier = Modifier.padding(24.dp))
         Button(
-            onClick = {},
+            onClick = {
+                navController
+                    .navigate(
+                        Destination.HomeScreen.createRoute(email)
+                    )
+            },
             modifier = Modifier
                 .fillMaxWidth(),
             colors = ButtonDefaults
