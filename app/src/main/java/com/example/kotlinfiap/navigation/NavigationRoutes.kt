@@ -20,10 +20,10 @@ fun NavigationRoutes() {
             InitialScreen(navController)
         }
         composable(Destination.HomeScreen.route) {
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable(Destination.SignUpScreen.route) {
-            SignUpScreen()
+            SignUpScreen(navController)
         }
         composable(Destination.LoginScreen.route) {
             LoginScreen(navController)

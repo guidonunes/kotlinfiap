@@ -34,11 +34,13 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
-fun LoginScreen (modifier: Modifier = Modifier) {
+fun LoginScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -66,7 +68,7 @@ fun LoginScreen (modifier: Modifier = Modifier) {
 @Composable
 private fun LoginScreenPreview () {
     KotlinfiapTheme() {
-        LoginScreen()
+        LoginScreen(rememberNavController())
     }
 }
 
@@ -104,7 +106,7 @@ private fun LogInTitlePreview() {
 }
 
 @Composable
-fun LogInForm(modifier: Modifier = Modifier) {
+fun LogInForm() {
     Column() {
         OutlinedTextField(
             value="",

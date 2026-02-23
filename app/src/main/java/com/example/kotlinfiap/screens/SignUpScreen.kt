@@ -39,11 +39,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier) {
+fun SignUpScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -77,7 +79,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun SignUpScreenPreview () {
     KotlinfiapTheme {
-        SignUpScreen()
+        SignUpScreen(rememberNavController())
     }
     
 }

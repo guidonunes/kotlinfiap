@@ -45,11 +45,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(navController: NavController) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -85,7 +87,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun HomeScreenPreview() {
     KotlinfiapTheme() {
-        HomeScreen()
+        HomeScreen(rememberNavController())
     }
 }
 
