@@ -4,7 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.kotlinfiap.screens.HomeScreen
 import com.example.kotlinfiap.screens.InitialScreen
+import com.example.kotlinfiap.screens.LoginScreen
+import com.example.kotlinfiap.screens.SignUpScreen
 
 @Composable
 fun NavigationRoutes() {
@@ -15,6 +18,15 @@ fun NavigationRoutes() {
     ) {
         composable(Destination.InitialScreen.route){
             InitialScreen()
+        }
+        composable(Destination.HomeScreen.route) {
+            HomeScreen()
+        }
+        composable(Destination.SignUpScreen.route) {
+            SignUpScreen()
+        }
+        composable(Destination.LoginScreen.route) {
+            LoginScreen()
         }
     }
 }

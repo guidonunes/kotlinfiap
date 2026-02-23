@@ -4,5 +4,5 @@ sealed class Destination(val route: String) {
     object InitialScreen: Destination("initial")
     object SignUpScreen: Destination("signup")
     object HomeScreen: Destination("home")
-    object SignInScreen: Destination("signin")
+    object LoginScreen: Destination("login")
 }
