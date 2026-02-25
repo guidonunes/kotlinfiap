@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -47,6 +49,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
+import com.example.kotlinfiap.components.CategoryItem
+import com.example.kotlinfiap.repository.getAllCategories
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
@@ -198,6 +202,8 @@ private fun MyBottomAppBarPreview() {
 
 @Composable
 fun ContentScreen(modifier: Modifier = Modifier) {
+    val categories = getAllCategories()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -253,6 +259,11 @@ fun ContentScreen(modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.primary
         )
+        LazyRow() {
+            items(categories) {category ->
+                CategoryItem(category)
+            }
+        }
         Spacer(modifier = Modifier.height(112.dp))
         Text(
             text = "Newly added games",
