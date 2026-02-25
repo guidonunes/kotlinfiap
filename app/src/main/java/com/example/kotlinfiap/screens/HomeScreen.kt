@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -207,14 +208,14 @@ fun ContentScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 0.dp)
     ) {
         OutlinedTextField(
             value = "",
             onValueChange = {},
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 8.dp),
+                .padding(horizontal = 16.dp, vertical = 8.dp),
             label = {
                 Text(
                     text = stringResource(R.string.search_game_by_title),
@@ -242,7 +243,7 @@ fun ContentScreen(modifier: Modifier = Modifier) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp)
+                .padding(horizontal = 16.dp, vertical = 4.dp)
                 .height(116.dp)
 
         ) {
@@ -255,20 +256,27 @@ fun ContentScreen(modifier: Modifier = Modifier) {
             )
         }
         Text(
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 4.dp),
             text = stringResource(R.string.genres),
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.primary
         )
-        LazyRow() {
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
             items(categories) {category ->
                 CategoryItem(category)
             }
         }
-        Spacer(modifier = Modifier.height(112.dp))
+
         Text(
             text = "Newly added games",
             style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 8.dp)
         )
     }
 }
