@@ -6,7 +6,7 @@ import com.example.kotlinfiap.R
 
 data class Category(
     val id: Int = 0,
-    val name: String = "",
+    val name: String = "Category Name",
     @DrawableRes val image: Int? = R.drawable.no_image,
     val background: Color = Color.Gray
 )
