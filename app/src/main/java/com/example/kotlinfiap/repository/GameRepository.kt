@@ -63,7 +63,4 @@ fun getAllReviews() = listOf<Review>(
         createdAt = LocalDate.now(),
         image = R.drawable.hollow_knight
     )
-
-
-
 )

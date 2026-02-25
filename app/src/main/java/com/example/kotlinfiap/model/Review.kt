@@ -12,5 +12,5 @@ data class Review(
     val description: String="",
     val campaignLength: Int=0,
     val createdAt: LocalDate = LocalDate.now(),
-    @DrawableRes val image: Int
+    @get:DrawableRes val image: Int
 )
