@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -51,7 +52,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.components.CategoryItem
+import com.example.kotlinfiap.components.ReviewItem
 import com.example.kotlinfiap.repository.getAllCategories
+import com.example.kotlinfiap.repository.getAllReviews
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
@@ -204,6 +207,7 @@ private fun MyBottomAppBarPreview() {
 @Composable
 fun ContentScreen(modifier: Modifier = Modifier) {
     val categories = getAllCategories()
+    val reviews = getAllReviews()
 
     Column(
         modifier = modifier
@@ -278,6 +282,14 @@ fun ContentScreen(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         )
+        LazyColumn(
+            contentPadding = PaddingValues(vertical = 8.dp,horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(reviews) { review ->
+                ReviewItem(review)
+            }
+        }
     }
 }
 
