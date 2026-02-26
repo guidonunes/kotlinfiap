@@ -64,3 +64,10 @@ fun getAllReviews() = listOf<Review>(
         image = R.drawable.hollow_knight
     )
 )
+
+fun getReviewsByCategory(id: Int) = getAllReviews()
+    .filter{ review ->
+        review.category.id == id
+    }
+
+

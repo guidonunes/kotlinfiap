@@ -23,4 +23,5 @@
     <string name="search_game_by_title">Search game by title</string>
     <string name="search_icon">Search Icon</string>
     <string name="genres">Categories</string>
+    <string name="search_by_category">Search by Category</string>
 </resources>
