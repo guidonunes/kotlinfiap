@@ -20,8 +20,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Cookie
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.StackedBarChart
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -184,7 +186,7 @@ fun CategoryReview(review: Review) {
             .height(130.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme
-                .colorScheme.primary
+                .colorScheme.onBackground
         )
     ) {
         Row(
@@ -230,14 +232,15 @@ fun CategoryReview(review: Review) {
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Cookie,
+                            imageVector = Icons.Default.StackedBarChart,
                             contentDescription = "",
                             tint = MaterialTheme.colorScheme.tertiary
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = review.difficultyLevel.description,
-                            style = MaterialTheme.typography.labelSmall
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.tertiary
                         )
                     }
                     Row(
@@ -253,8 +256,9 @@ fun CategoryReview(review: Review) {
                                 .width(8.dp)
                         )
                         Text(
-                            text = "${review.campaignLength} min",
-                            style = MaterialTheme.typography.labelSmall
+                            text = "${review.campaignLength} h",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.tertiary
                         )
                     }
                 }
