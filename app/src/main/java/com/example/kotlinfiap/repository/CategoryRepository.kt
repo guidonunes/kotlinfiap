@@ -50,6 +50,4 @@ fun getAllCategories() = listOf<Category>(
 )
 
 fun getCategoryById(id: Int) = getAllCategories()
-    .filter{ categoryType ->
-        categoryType.id == id
-    }
+    .firstOrNull { it.id == id }
