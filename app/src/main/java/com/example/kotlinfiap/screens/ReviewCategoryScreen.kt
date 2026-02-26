@@ -282,6 +282,6 @@ private fun CategoryReviewPreview() {
 @Composable
 private fun ReviewCategoryScreenPreview() {
     KotlinfiapTheme() {
-        ReviewCategoryScreen(null, null)
+        ReviewCategoryScreen(3000, null)
     }
 }

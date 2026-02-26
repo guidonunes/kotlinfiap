@@ -53,6 +53,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.components.CategoryItem
 import com.example.kotlinfiap.components.ReviewItem
+import com.example.kotlinfiap.navigation.Destination
 import com.example.kotlinfiap.repository.getAllCategories
 import com.example.kotlinfiap.repository.getAllReviews
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
@@ -84,7 +85,9 @@ fun HomeScreen(navController: NavController, email: String?) {
                 modifier = Modifier
                     .padding(paddingValues)
             ) {
-                ContentScreen()
+                ContentScreen(
+                    navController = navController
+                )
             }
         }
     }
@@ -205,7 +208,8 @@ private fun MyBottomAppBarPreview() {
 }
 
 @Composable
-fun ContentScreen(modifier: Modifier = Modifier) {
+fun ContentScreen(modifier: Modifier = Modifier,
+                  navController: NavController) {
     val categories = getAllCategories()
     val reviews = getAllReviews()
 
@@ -271,7 +275,12 @@ fun ContentScreen(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(categories) {category ->
-                CategoryItem(category)
+                CategoryItem(category =category, onClick = {
+                    navController.navigate(
+                        route = Destination.ReviewCategoryScreen
+                            .createRoute(category.id)
+                    )
+                })
             }
         }
 
@@ -298,6 +307,6 @@ fun ContentScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun ContentScreenPreview() {
     KotlinfiapTheme() {
-        ContentScreen()
+        ContentScreen(navController = rememberNavController())
     }
 }

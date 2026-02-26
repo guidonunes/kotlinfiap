@@ -12,6 +12,7 @@ import com.example.kotlinfiap.screens.HomeScreen
 import com.example.kotlinfiap.screens.InitialScreen
 import com.example.kotlinfiap.screens.LoginScreen
 import com.example.kotlinfiap.screens.SignUpScreen
+import com.example.kotlinfiap.screens.ReviewCategoryScreen
 
 @Composable
 fun NavigationRoutes() {
@@ -44,6 +45,18 @@ fun NavigationRoutes() {
         }
         composable(Destination.LoginScreen.route) {
             LoginScreen(navController)
+        }
+
+        composable(
+            route = Destination.ReviewCategoryScreen.route,
+            arguments = listOf(
+                navArgument(name = "categoryId") {
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            val categoryId = it.arguments?.getInt("categoryId")
+            ReviewCategoryScreen(categoryId, navController)
         }
     }
 }
