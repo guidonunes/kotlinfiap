@@ -89,7 +89,7 @@ fun InitialScreen(navController: NavController){
                         },
                         colors = ButtonDefaults
                             .buttonColors(
-                                containerColor = MaterialTheme.colorScheme.tertiary
+                                containerColor = MaterialTheme.colorScheme.primary
                             ),
                         border = BorderStroke(
                             width = 1.dp,
@@ -112,7 +112,7 @@ fun InitialScreen(navController: NavController){
                         },
                         colors = ButtonDefaults
                             .buttonColors(
-                                containerColor = MaterialTheme.colorScheme.primary
+                                containerColor = MaterialTheme.colorScheme.tertiary
                             ),
                         border = BorderStroke(
                             width = 1.dp,
@@ -136,7 +136,7 @@ fun InitialScreen(navController: NavController){
 @Composable
 @Preview(
     showSystemUi = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES
+    uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 fun InitialScreenPreview() {
     KotlinfiapTheme {
