@@ -1,6 +1,7 @@
 package com.example.kotlinfiap.screens
 
 import android.content.res.Configuration
+import android.util.Patterns
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,10 +19,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddAPhoto
+import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.RemoveRedEye
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -29,6 +32,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,12 +46,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.model.User
+import com.example.kotlinfiap.navigation.Destination
 import com.example.kotlinfiap.repository.SharedPreferencesUserRepository
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
@@ -73,7 +79,7 @@ fun SignUpScreen(navController: NavController) {
             TitleComponent()
             Spacer(modifier = Modifier.height(46.dp))
             ProfileImage()
-            SignUpUserForm()
+            SignUpUserForm(navController)
         }
     }
 }
@@ -154,10 +160,28 @@ private fun ProfileImagePreview() {
 }
 
 @Composable
-fun SignUpUserForm(modifier: Modifier = Modifier) {
+fun SignUpUserForm(navController: NavController) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
+    var isNameError by remember { mutableStateOf(false) }
+    var isEmailError by remember { mutableStateOf(false) }
+    var isPasswordError by remember { mutableStateOf(false) }
+
+    var showDialogError by remember { mutableStateOf(false) }
+    var showDialogSuccess by remember { mutableStateOf(false) }
+
+
+    fun validate(): Boolean {
+        isNameError = name.length < 3
+        isEmailError = email.length < 3 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        isPasswordError = password.length < 3
+        return !isNameError && !isEmailError && !isPasswordError
+    }
+
+
+
 
     val userRepository = SharedPreferencesUserRepository(context = LocalContext.current)
 
@@ -196,6 +220,26 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
                     tint = MaterialTheme.colorScheme.secondary
 
                 )
+            },
+            isError = isNameError,
+            trailingIcon = {
+                if (isNameError) {
+                    Icon(
+                        imageVector = Icons.Default.Error,
+                        contentDescription = "Error",
+                        tint = MaterialTheme.colorScheme.error
+                    )
+                }
+            },
+            supportingText = {
+                if (isNameError) {
+                    Text(
+                        text = "Name must be at least 3 characters",
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.End
+                    )
+                }
             }
         )
         // user email
@@ -226,6 +270,26 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
                     tint = MaterialTheme.colorScheme.secondary
 
                 )
+            },
+            isError = isEmailError,
+            trailingIcon = {
+                if (isEmailError) {
+                    Icon(
+                        imageVector = Icons.Default.Error,
+                        contentDescription = "Error",
+                        tint = MaterialTheme.colorScheme.error
+                    )
+                }
+            },
+            supportingText = {
+                if (isEmailError) {
+                    Text(
+                        text = "Email must be at least 3 characters",
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.End
+                    )
+                }
             }
         )
         //Password field
@@ -257,25 +321,43 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
 
                 )
             },
+            isError = isPasswordError,
             trailingIcon = {
-                Icon(
-                    imageVector = Icons.Default.RemoveRedEye,
-                    contentDescription = stringResource(R.string.eye_icon),
-                    tint = MaterialTheme.colorScheme.secondary
-
-                )
+                if (isPasswordError) {
+                    Icon(
+                        imageVector = Icons.Default.Error,
+                        contentDescription = "Error",
+                        tint = MaterialTheme.colorScheme.error
+                    )
+                }
+            },
+            supportingText = {
+                if (isPasswordError) {
+                    Text(
+                        text = "Password must be at least 3 characters",
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.End
+                    )
+                }
             }
         )
         Spacer(modifier = Modifier.padding(32.dp))
         Button(
             onClick = {
-                userRepository.saveUser(
-                    User(
-                        name = name,
-                        email = email,
-                        password = password
+                if (validate()) {
+                    userRepository.saveUser(
+                        User(
+                            name = name,
+                            email = email,
+                            password = password
+                        )
                     )
-                )
+                    showDialogSuccess = true
+                } else {
+                    showDialogError = true
+                }
+
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -296,12 +378,60 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
             )
         }
     }
+    if(showDialogSuccess) {
+        AlertDialog(
+            onDismissRequest = {
+                showDialogError = false
+            },
+            title = {
+                Text(text = "Success")
+            },
+            text = {
+                Text(text = "User created successfully")
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showDialogSuccess = false
+                        navController.navigate(Destination.LoginScreen.route)
+                    }
+                ) {
+                    Text(text = "OK")
+                }
+            }
+
+        )
+    }
+
+    if (showDialogError) {
+        AlertDialog(
+            onDismissRequest = {
+                showDialogError = false
+
+                },
+            title = {
+                Text(text = "Error")
+            },
+            text = {
+                Text(text = "Please fill in all fields")
+            },
+            confirmButton = {
+                TextButton(
+                    onClick= {
+                        showDialogError = false
+                    }
+                ) {
+                    Text(text = "OK")
+                }
+            }
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun SignUpUserFormPreview() {
     KotlinfiapTheme() {
-        SignUpUserForm()
+        SignUpUserForm(rememberNavController())
     }
 }
