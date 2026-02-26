@@ -31,9 +31,14 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.LineHeightStyle
@@ -42,6 +47,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
+import com.example.kotlinfiap.model.User
+import com.example.kotlinfiap.repository.SharedPreferencesUserRepository
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
@@ -130,7 +137,7 @@ fun ProfileImage(modifier: Modifier = Modifier) {
         Icon(
             imageVector = Icons.Default.AddAPhoto,
             contentDescription = stringResource(R.string.add_photo_icon),
-            tint = MaterialTheme.colorScheme.tertiary,
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .align(alignment = Alignment.BottomEnd)
         )
@@ -148,6 +155,14 @@ private fun ProfileImagePreview() {
 
 @Composable
 fun SignUpUserForm(modifier: Modifier = Modifier) {
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    val userRepository = SharedPreferencesUserRepository(context = LocalContext.current)
+
+
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -155,8 +170,10 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
     ) {
         //Username input field
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = name,
+            onValueChange = {
+                name = it
+            },
             modifier = Modifier
                 .fillMaxWidth(),
             label = {
@@ -170,7 +187,6 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
                 colors(
                     focusedBorderColor = MaterialTheme.colorScheme.primary,
                     unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
-                    focusedTextColor = MaterialTheme.colorScheme.primary,
                     unfocusedTextColor = MaterialTheme.colorScheme.onBackground
                 ),
             leadingIcon = {
@@ -184,8 +200,10 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
         )
         // user email
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = email,
+            onValueChange = {
+                email = it
+            },
             modifier = Modifier
                 .fillMaxWidth(),
             label = {
@@ -199,7 +217,6 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
             colors(
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
-                focusedTextColor = MaterialTheme.colorScheme.primary,
                 unfocusedTextColor = MaterialTheme.colorScheme.onBackground
             ),
             leadingIcon = {
@@ -213,8 +230,10 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
         )
         //Password field
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = password,
+            onValueChange = {
+                password = it
+            },
             modifier = Modifier
                 .fillMaxWidth(),
             label = {
@@ -228,7 +247,6 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
             colors(
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
-                focusedTextColor = MaterialTheme.colorScheme.primary,
                 unfocusedTextColor = MaterialTheme.colorScheme.onBackground
             ),
             leadingIcon = {
@@ -250,12 +268,20 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.padding(32.dp))
         Button(
-            onClick = {},
+            onClick = {
+                userRepository.saveUser(
+                    User(
+                        name = name,
+                        email = email,
+                        password = password
+                    )
+                )
+            },
             modifier = Modifier
                 .fillMaxWidth(),
             colors = ButtonDefaults
                 .buttonColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary
+                    containerColor = MaterialTheme.colorScheme.primary
                 ),
             border = BorderStroke(
                 width = 1.dp,
@@ -264,7 +290,7 @@ fun SignUpUserForm(modifier: Modifier = Modifier) {
 
             ) {
             Text(
-                text = stringResource(R.string.button_sign_up),
+                text = stringResource(R.string.create_a_new_account),
                 color = MaterialTheme.colorScheme.onPrimary,
                 style = MaterialTheme.typography.bodySmall
             )
