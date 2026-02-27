@@ -43,6 +43,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -54,6 +55,8 @@ import com.example.kotlinfiap.R
 import com.example.kotlinfiap.components.CategoryItem
 import com.example.kotlinfiap.components.ReviewItem
 import com.example.kotlinfiap.navigation.Destination
+import com.example.kotlinfiap.repository.SharedPreferencesUserRepository
+import com.example.kotlinfiap.repository.UserRepository
 import com.example.kotlinfiap.repository.getAllCategories
 import com.example.kotlinfiap.repository.getAllReviews
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
@@ -104,6 +107,11 @@ private fun HomeScreenPreview() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTopAppBar(email: String) {
+    val userRepository: UserRepository =
+        SharedPreferencesUserRepository(context = LocalContext.current)
+
+    val user = userRepository.getUser()
+
     TopAppBar(
         modifier = Modifier
             .fillMaxWidth(),
@@ -119,7 +127,7 @@ fun MyTopAppBar(email: String) {
             ) {
                 Column() {
                     Text(
-                        text = "Hello, John Doe!",
+                        text = "Hello, ${user.name}",
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
