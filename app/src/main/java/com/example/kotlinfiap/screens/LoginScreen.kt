@@ -15,11 +15,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.RemoveRedEye
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -32,10 +36,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -43,6 +50,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.navigation.Destination
+import com.example.kotlinfiap.repository.SharedPreferencesUserRepository
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
@@ -123,6 +131,18 @@ fun LogInForm(navController: NavController) {
         mutableStateOf("")
     }
 
+    var showPassword by remember {
+        mutableStateOf(false)
+    }
+
+    var authenticateError by remember {
+        mutableStateOf(false)
+    }
+
+    val userRepository =
+        SharedPreferencesUserRepository(context = LocalContext.current)
+
+
     Column() {
         OutlinedTextField(
             value= email,
@@ -185,25 +205,47 @@ fun LogInForm(navController: NavController) {
                 )
             },
             trailingIcon = {
-                Icon(
-                    imageVector = Icons.Default.RemoveRedEye,
-                    contentDescription = "Eye icon",
-                    tint = MaterialTheme.colorScheme.secondary
-                )
+                val image = if(showPassword) {
+                    Icons.Default.Visibility
+                } else {
+                    Icons.Default.VisibilityOff
+                }
+                IconButton(
+                    onClick = {showPassword = !showPassword}
+                ) {
+                    Icon(
+                        imageVector = image,
+                        contentDescription = "Eye icon",
+                        tint = MaterialTheme.colorScheme.secondary
+                    )
+                }
+
             },
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email,
+                keyboardType = KeyboardType.Password,
                 imeAction = ImeAction.Done
-            )
-
+            ),
+            visualTransformation = if(showPassword){
+                VisualTransformation.None
+            } else {
+                PasswordVisualTransformation()
+            }
         )
         Spacer(modifier = Modifier.padding(24.dp))
         Button(
             onClick = {
-                navController
-                    .navigate(
-                        Destination.HomeScreen.createRoute(email)
-                    )
+                val authenticate = userRepository.login(email, password)
+                if (authenticate) {
+                    navController
+                        .navigate(
+                            Destination.HomeScreen.createRoute(email)
+                        )
+                } else {
+                    authenticateError = true
+                }
+//                val email = userRepository.getUser().email
+//                println(email)
+
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -223,6 +265,23 @@ fun LogInForm(navController: NavController) {
                 style = MaterialTheme.typography.bodySmall
             )
         }
+
+        Spacer(modifier = Modifier.padding(8.dp))
+        if(authenticateError) {
+            Row {
+                Icon(
+                    imageVector = Icons.Default.Error,
+                    contentDescription = "Error icon",
+                    tint = MaterialTheme.colorScheme.error
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                Text(
+                    text = stringResource(R.string.authentication_error),
+                    color = MaterialTheme.colorScheme.error,
+                )
+            }
+        }
+
         Spacer(modifier = Modifier.padding(8.dp))
         Row (
             modifier = Modifier.fillMaxWidth(),
