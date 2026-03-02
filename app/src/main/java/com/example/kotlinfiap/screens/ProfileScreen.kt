@@ -53,18 +53,19 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.model.User
 import com.example.kotlinfiap.navigation.Destination
 import com.example.kotlinfiap.repository.RoomUserRepository
+import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 import com.example.kotlinfiap.utils.convertBitmapToByteArray
 
 @Composable
 fun ProfileScreen (navController: NavController) {
-    @Composable
-    fun SignUpScreen(navController: NavController) {
         val context = LocalContext.current
 
         val placeholderImage = BitmapFactory
@@ -118,12 +119,20 @@ fun ProfileScreen (navController: NavController) {
                 verticalArrangement = Arrangement.Center
 
             ) {
-                TitleComponent()
+                ProfileTitleComponent()
                 Spacer(modifier = Modifier.height(46.dp))
-                ProfileImage(profileImage, launcher)
-                SignUpUserForm(navController, profileImage)
+                ProfileUserImage(profileImage, launcher)
+                ProfileUserForm(navController, profileImage)
             }
         }
+
+}
+
+@Preview
+@Composable
+private fun ProfileScreenPreview() {
+    KotlinfiapTheme() {
+        ProfileScreen(rememberNavController())
     }
 }
 
