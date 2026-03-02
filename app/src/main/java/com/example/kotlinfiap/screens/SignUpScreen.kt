@@ -62,8 +62,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.model.User
 import com.example.kotlinfiap.navigation.Destination
+import com.example.kotlinfiap.repository.RoomUserRepository
 import com.example.kotlinfiap.repository.SharedPreferencesUserRepository
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
+import com.example.kotlinfiap.utils.convertBitmapToByteArray
 
 @Composable
 fun SignUpScreen(navController: NavController) {
@@ -235,7 +237,8 @@ fun SignUpUserForm(navController: NavController, profileImage: Bitmap) {
 
 
 
-    val userRepository = SharedPreferencesUserRepository(context = LocalContext.current)
+//    val userRepository = SharedPreferencesUserRepository(context = LocalContext.current)
+    val userRepository = RoomUserRepository(context = LocalContext.current)
 
 
 
@@ -402,7 +405,8 @@ fun SignUpUserForm(navController: NavController, profileImage: Bitmap) {
                         User(
                             name = name,
                             email = email,
-                            password = password
+                            password = password,
+                            userImage = convertBitmapToByteArray(profileImage)
                         )
                     )
                     showDialogSuccess = true
