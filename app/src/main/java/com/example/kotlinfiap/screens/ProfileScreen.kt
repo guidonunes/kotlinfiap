@@ -122,7 +122,7 @@ fun ProfileScreen (navController: NavController, email: String?) {
                 ProfileTitleComponent()
                 Spacer(modifier = Modifier.height(46.dp))
                 ProfileUserImage(profileImage, launcher)
-                ProfileUserForm(navController, profileImage)
+                ProfileUserForm(navController, profileImage, email)
             }
         }
 
@@ -185,12 +185,14 @@ fun ProfileUserImage(profileImage: Bitmap, launcher: ManagedActivityResultLaunch
 }
 
 @Composable
-fun ProfileUserForm(navController: NavController, profileImage: Bitmap) {
+fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmail: String?) {
+//    val userRepository = RoomUserRepository(context = LocalContext.current)
+    val userRepository = RoomUserRepository(context = LocalContext.current)
+    var user = userRepository.getUserByEmail(userEmail!!)
 
-
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf(user!!.name) }
+    var email by remember { mutableStateOf(user!!.email) }
+    var password by remember { mutableStateOf(user!!.password) }
 
     var isNameError by remember { mutableStateOf(false) }
     var isEmailError by remember { mutableStateOf(false) }
@@ -211,7 +213,8 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap) {
 
 
 //    val userRepository = SharedPreferencesUserRepository(context = LocalContext.current)
-    val userRepository = RoomUserRepository(context = LocalContext.current)
+
+
 
 
 
