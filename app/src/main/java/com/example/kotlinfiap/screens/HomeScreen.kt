@@ -166,7 +166,10 @@ fun MyTopAppBar(email: String) {
                 ) {
                     Image(
                         bitmap = profileBitmap.asImageBitmap(),
-                        contentDescription = "User image"
+                        contentDescription = "User image",
+                        modifier = Modifier
+                            .size(52.dp),
+                        contentScale = ContentScale.Crop
                     )
                 }
             }
