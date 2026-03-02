@@ -26,4 +26,7 @@
     <string name="search_by_category">Search by Category</string>
     <string name="create_a_new_account">Create a new account</string>
     <string name="authentication_error">Authentication error!</string>
+    <string name="profile">Profile</string>
+    <string name="user_data_information">User Data Information</string>
+    <string name="update_profile">Update Profile</string>
 </resources>

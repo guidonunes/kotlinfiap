@@ -143,12 +143,12 @@ fun ProfileTitleComponent(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.sign_up),
+            text = stringResource(R.string.profile),
             color = MaterialTheme.colorScheme.onTertiary,
             style = MaterialTheme.typography.titleLarge
         )
         Text(
-            text = stringResource(R.string.create_account),
+            text = stringResource(R.string.user_data_information),
             color = MaterialTheme.colorScheme.onTertiary,
             style = MaterialTheme.typography.titleSmall
         )
@@ -401,7 +401,7 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap) {
 
             ) {
             Text(
-                text = stringResource(R.string.create_a_new_account),
+                text = stringResource(R.string.update_profile),
                 color = MaterialTheme.colorScheme.onPrimary,
                 style = MaterialTheme.typography.bodySmall
             )
@@ -416,7 +416,7 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap) {
                 Text(text = "Success")
             },
             text = {
-                Text(text = "User created successfully")
+                Text(text = "Profile updated successfully")
             },
             confirmButton = {
                 TextButton(
