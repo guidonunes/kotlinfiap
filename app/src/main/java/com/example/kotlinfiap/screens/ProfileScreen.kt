@@ -65,7 +65,7 @@ import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 import com.example.kotlinfiap.utils.convertBitmapToByteArray
 
 @Composable
-fun ProfileScreen (navController: NavController) {
+fun ProfileScreen (navController: NavController, email: String?) {
         val context = LocalContext.current
 
         val placeholderImage = BitmapFactory
@@ -132,7 +132,7 @@ fun ProfileScreen (navController: NavController) {
 @Composable
 private fun ProfileScreenPreview() {
     KotlinfiapTheme() {
-        ProfileScreen(rememberNavController())
+        ProfileScreen(rememberNavController(), "")
     }
 }
 

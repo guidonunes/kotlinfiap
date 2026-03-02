@@ -45,9 +45,17 @@ fun NavigationRoutes() {
             SignUpScreen(navController)
         }
 
-        composable(Destination.ProfileScreen.route) {
-            ProfileScreen(navController)
+        composable(Destination.ProfileScreen.route,
+            arguments = listOf(
+                navArgument("email") {
+                    type = NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val email = backStackEntry.arguments?.getString("email")
+            ProfileScreen(navController, email)
         }
+
 
         composable(Destination.LoginScreen.route) {
             LoginScreen(navController)
