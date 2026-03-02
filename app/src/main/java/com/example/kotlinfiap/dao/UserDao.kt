@@ -11,7 +11,7 @@ import com.example.kotlinfiap.model.User
 @Dao
 interface UserDao {
     @Insert
-    fun save(user: User): Int
+    fun save(user: User): Long
 
     @Delete
     fun delete(user: User): Int
