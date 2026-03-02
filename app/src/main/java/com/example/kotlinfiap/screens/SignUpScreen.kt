@@ -68,6 +68,42 @@ import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
 fun SignUpScreen(navController: NavController) {
+    val context = LocalContext.current
+
+    val placeholderImage = BitmapFactory
+        .decodeResource(
+            Resources.getSystem(),
+            android.R.drawable.ic_menu_gallery
+        )
+
+    var profileImage by remember {
+        mutableStateOf<Bitmap>(placeholderImage)
+    }
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent(),
+    ) { uri ->
+        if(Build.VERSION.SDK_INT < 28) {
+            profileImage = MediaStore
+                .Images
+                .Media
+                .getBitmap(
+                    context.contentResolver,
+                    uri
+                )
+        } else {
+            if(uri != null) {
+                val source = ImageDecoder
+                    .createSource(context.contentResolver, uri)
+                profileImage = ImageDecoder
+                    .decodeBitmap(source)
+            } else {
+                profileImage = placeholderImage
+            }
+        }
+
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -170,41 +206,6 @@ private fun ProfileImagePreview() {
 
 @Composable
 fun SignUpUserForm(navController: NavController) {
-    val context = LocalContext.current
-
-    val placeholderImage = BitmapFactory
-        .decodeResource(
-            Resources.getSystem(),
-            android.R.drawable.ic_menu_gallery
-        )
-
-    var profileImage by remember {
-        mutableStateOf<Bitmap>(placeholderImage)
-    }
-
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
-        ) { uri ->
-            if(Build.VERSION.SDK_INT < 28) {
-                profileImage = MediaStore
-                    .Images
-                    .Media
-                    .getBitmap(
-                        context.contentResolver,
-                        uri
-                    )
-            } else {
-                if(uri != null) {
-                    val source = ImageDecoder
-                        .createSource(context.contentResolver, uri)
-                    profileImage = ImageDecoder
-                        .decodeBitmap(source)
-                } else {
-                    profileImage = placeholderImage
-                }
-            }
-
-    }
 
 
     var name by remember { mutableStateOf("") }
