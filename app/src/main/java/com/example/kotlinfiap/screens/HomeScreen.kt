@@ -158,7 +158,11 @@ fun MyTopAppBar(email: String = "", navController: NavController) {
                         .size(52.dp)
                         .clickable (
                             onClick = {
-                                navController.navigate(route = "profile")
+                                navController.navigate(
+                                    Destination
+                                        .ProfileScreen
+                                        .createRoute(email)
+                                )
                             }
                         ),
 
