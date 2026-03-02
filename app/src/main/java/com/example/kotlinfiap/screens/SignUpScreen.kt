@@ -1,7 +1,16 @@
 package com.example.kotlinfiap.screens
 
 import android.content.res.Configuration
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import android.util.Patterns
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -161,6 +170,43 @@ private fun ProfileImagePreview() {
 
 @Composable
 fun SignUpUserForm(navController: NavController) {
+    val context = LocalContext.current
+
+    val placeholderImage = BitmapFactory
+        .decodeResource(
+            Resources.getSystem(),
+            android.R.drawable.ic_menu_gallery
+        )
+
+    var profileImage by remember {
+        mutableStateOf<Bitmap>(placeholderImage)
+    }
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent(),
+        ) { uri ->
+            if(Build.VERSION.SDK_INT < 28) {
+                profileImage = MediaStore
+                    .Images
+                    .Media
+                    .getBitmap(
+                        context.contentResolver,
+                        uri
+                    )
+            } else {
+                if(uri != null) {
+                    val source = ImageDecoder
+                        .createSource(context.contentResolver, uri)
+                    profileImage = ImageDecoder
+                        .decodeBitmap(source)
+                } else {
+                    profileImage = placeholderImage
+                }
+            }
+
+    }
+
+
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
