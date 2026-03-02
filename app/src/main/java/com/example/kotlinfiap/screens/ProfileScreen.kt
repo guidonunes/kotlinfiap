@@ -63,444 +63,387 @@ import com.example.kotlinfiap.utils.convertBitmapToByteArray
 
 @Composable
 fun ProfileScreen (navController: NavController) {
-    val context = LocalContext.current
-
-    val placeholderImage = BitmapFactory
-        .decodeResource(
-            Resources.getSystem(),
-            android.R.drawable.ic_menu_gallery
-        )
-
-    var profileImage by remember {
-        mutableStateOf<Bitmap>(placeholderImage)
-    }
-
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
-    ) { uri ->
-        if(Build.VERSION.SDK_INT < 28) {
-            profileImage = MediaStore
-                .Images
-                .Media
-                .getBitmap(
-                    context.contentResolver,
-                    uri
-                )
-        } else {
-            if(uri != null) {
-                val source = ImageDecoder
-                    .createSource(context.contentResolver, uri)
-                profileImage = ImageDecoder
-                    .decodeBitmap(source)
-            } else {
-                profileImage = placeholderImage
-            }
-        }
-
-    }
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                MaterialTheme.colorScheme.background
-            )
-    ) {
-        TopEndCard(modifier = Modifier.align(alignment = Alignment.TopEnd))
-        BottomStartCard(modifier = Modifier.align(alignment = Alignment.BottomStart))
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .align(alignment = Alignment.Center),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-
-        ) {
-            TitleComponent()
-            Spacer(modifier = Modifier.height(46.dp))
-            ProfileImage(profileImage, launcher)
-            SignUpUserForm(navController, profileImage)
-        }
-    }
-
-    val context = LocalContext.current
-
-    val placeholderImage = BitmapFactory
-        .decodeResource(
-            Resources.getSystem(),
-            android.R.drawable.ic_menu_gallery
-        )
-
-    var profileImage by remember {
-        mutableStateOf<Bitmap>(placeholderImage)
-    }
-
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
-    ) { uri ->
-        if(Build.VERSION.SDK_INT < 28) {
-            profileImage = MediaStore
-                .Images
-                .Media
-                .getBitmap(
-                    context.contentResolver,
-                    uri
-                )
-        } else {
-            if(uri != null) {
-                val source = ImageDecoder
-                    .createSource(context.contentResolver, uri)
-                profileImage = ImageDecoder
-                    .decodeBitmap(source)
-            } else {
-                profileImage = placeholderImage
-            }
-        }
-
-    }
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                MaterialTheme.colorScheme.background
-            )
-    ) {
-        TopEndCard(modifier = Modifier.align(alignment = Alignment.TopEnd))
-        BottomStartCard(modifier = Modifier.align(alignment = Alignment.BottomStart))
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .align(alignment = Alignment.Center),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-
-        ) {
-            TitleComponent()
-            Spacer(modifier = Modifier.height(46.dp))
-            ProfileImage(profileImage, launcher)
-            SignUpUserForm(navController, profileImage)
-        }
-    }
-
     @Composable
-    fun ProfileTitleComponent(modifier: Modifier = Modifier) {
-        Column (
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(R.string.sign_up),
-                color = MaterialTheme.colorScheme.onTertiary,
-                style = MaterialTheme.typography.titleLarge
-            )
-            Text(
-                text = stringResource(R.string.create_account),
-                color = MaterialTheme.colorScheme.onTertiary,
-                style = MaterialTheme.typography.titleSmall
-            )
-        }
-    }
+    fun SignUpScreen(navController: NavController) {
+        val context = LocalContext.current
 
-    @Composable
-    fun ProfileProfileImage(profileImage: Bitmap, launcher: ManagedActivityResultLauncher<String, Uri?>) {
+        val placeholderImage = BitmapFactory
+            .decodeResource(
+                Resources.getSystem(),
+                android.R.drawable.ic_menu_gallery
+            )
+
+        var profileImage by remember {
+            mutableStateOf<Bitmap>(placeholderImage)
+        }
+
+        val launcher = rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.GetContent(),
+        ) { uri ->
+            if (Build.VERSION.SDK_INT < 28) {
+                profileImage = MediaStore
+                    .Images
+                    .Media
+                    .getBitmap(
+                        context.contentResolver,
+                        uri
+                    )
+            } else {
+                if (uri != null) {
+                    val source = ImageDecoder
+                        .createSource(context.contentResolver, uri)
+                    profileImage = ImageDecoder
+                        .decodeBitmap(source)
+                } else {
+                    profileImage = placeholderImage
+                }
+            }
+
+        }
+
         Box(
             modifier = Modifier
-                .size(120.dp)
+                .fillMaxSize()
+                .background(
+                    MaterialTheme.colorScheme.background
+                )
         ) {
-            Image(
-                bitmap = profileImage.asImageBitmap(),
-                contentDescription = stringResource(R.string.profile_image),
+            TopEndCard(modifier = Modifier.align(alignment = Alignment.TopEnd))
+            BottomStartCard(modifier = Modifier.align(alignment = Alignment.BottomStart))
+            Column(
                 modifier = Modifier
-                    .clip(shape = CircleShape)
-                    .size(110.dp)
-                    .align(alignment = Alignment.Center)
-            )
-            Icon(
-                imageVector = Icons.Default.AddAPhoto,
-                contentDescription = stringResource(R.string.add_photo_icon),
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .align(alignment = Alignment.BottomEnd)
-                    .clickable(
-                        onClick = {
-                            launcher.launch("image/*")
-                        }
-                    )
-            )
+                    .fillMaxSize()
+                    .align(alignment = Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+
+            ) {
+                TitleComponent()
+                Spacer(modifier = Modifier.height(46.dp))
+                ProfileImage(profileImage, launcher)
+                SignUpUserForm(navController, profileImage)
+            }
         }
     }
+}
 
-    @Composable
-    fun ProfileUserForm(navController: NavController, profileImage: Bitmap) {
+@Composable
+fun ProfileTitleComponent(modifier: Modifier = Modifier) {
+    Column (
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(R.string.sign_up),
+            color = MaterialTheme.colorScheme.onTertiary,
+            style = MaterialTheme.typography.titleLarge
+        )
+        Text(
+            text = stringResource(R.string.create_account),
+            color = MaterialTheme.colorScheme.onTertiary,
+            style = MaterialTheme.typography.titleSmall
+        )
+    }
+}
+
+@Composable
+fun ProfileUserImage(profileImage: Bitmap, launcher: ManagedActivityResultLauncher<String, Uri?>) {
+    Box(
+        modifier = Modifier
+            .size(120.dp)
+    ) {
+        Image(
+            bitmap = profileImage.asImageBitmap(),
+            contentDescription = stringResource(R.string.profile_image),
+            modifier = Modifier
+                .clip(shape = CircleShape)
+                .size(110.dp)
+                .align(alignment = Alignment.Center)
+        )
+        Icon(
+            imageVector = Icons.Default.AddAPhoto,
+            contentDescription = stringResource(R.string.add_photo_icon),
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .align(alignment = Alignment.BottomEnd)
+                .clickable(
+                    onClick = {
+                        launcher.launch("image/*")
+                    }
+                )
+        )
+    }
+}
+
+@Composable
+fun ProfileUserForm(navController: NavController, profileImage: Bitmap) {
 
 
-        var name by remember { mutableStateOf("") }
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
-        var isNameError by remember { mutableStateOf(false) }
-        var isEmailError by remember { mutableStateOf(false) }
-        var isPasswordError by remember { mutableStateOf(false) }
+    var isNameError by remember { mutableStateOf(false) }
+    var isEmailError by remember { mutableStateOf(false) }
+    var isPasswordError by remember { mutableStateOf(false) }
 
-        var showDialogError by remember { mutableStateOf(false) }
-        var showDialogSuccess by remember { mutableStateOf(false) }
+    var showDialogError by remember { mutableStateOf(false) }
+    var showDialogSuccess by remember { mutableStateOf(false) }
 
 
-        fun validate(): Boolean {
-            isNameError = name.length < 3
-            isEmailError = email.length < 3 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
-            isPasswordError = password.length < 3
-            return !isNameError && !isEmailError && !isPasswordError
-        }
+    fun validate(): Boolean {
+        isNameError = name.length < 3
+        isEmailError = email.length < 3 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        isPasswordError = password.length < 3
+        return !isNameError && !isEmailError && !isPasswordError
+    }
 
 
 
 
 //    val userRepository = SharedPreferencesUserRepository(context = LocalContext.current)
-        val userRepository = RoomUserRepository(context = LocalContext.current)
+    val userRepository = RoomUserRepository(context = LocalContext.current)
 
 
 
-        Column(
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(32.dp)
+    ) {
+        //Username input field
+        OutlinedTextField(
+            value = name,
+            onValueChange = {
+                name = it
+            },
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(32.dp)
-        ) {
-            //Username input field
-            OutlinedTextField(
-                value = name,
-                onValueChange = {
-                    name = it
-                },
-                modifier = Modifier
-                    .fillMaxWidth(),
-                label = {
-                    Text(
-                        text = stringResource(R.string.your_name),
-                        style = MaterialTheme.typography.labelSmall
-                    )
-                },
-                shape = RoundedCornerShape(16.dp),
-                colors = OutlinedTextFieldDefaults.
-                colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
-                    unfocusedTextColor = MaterialTheme.colorScheme.onBackground
-                ),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = stringResource(R.string.person_icon),
-                        tint = MaterialTheme.colorScheme.secondary
-
-                    )
-                },
-                isError = isNameError,
-                trailingIcon = {
-                    if (isNameError) {
-                        Icon(
-                            imageVector = Icons.Default.Error,
-                            contentDescription = "Error",
-                            tint = MaterialTheme.colorScheme.error
-                        )
-                    }
-                },
-                supportingText = {
-                    if (isNameError) {
-                        Text(
-                            text = "Name must be at least 3 characters",
-                            color = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.End
-                        )
-                    }
-                }
-            )
-            // user email
-            OutlinedTextField(
-                value = email,
-                onValueChange = {
-                    email = it
-                },
-                modifier = Modifier
-                    .fillMaxWidth(),
-                label = {
-                    Text(
-                        text = stringResource(R.string.your_email),
-                        style = MaterialTheme.typography.labelSmall
-                    )
-                },
-                shape = RoundedCornerShape(16.dp),
-                colors = OutlinedTextFieldDefaults.
-                colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
-                    unfocusedTextColor = MaterialTheme.colorScheme.onBackground
-                ),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Mail,
-                        contentDescription = stringResource(R.string.email_icon),
-                        tint = MaterialTheme.colorScheme.secondary
-
-                    )
-                },
-                isError = isEmailError,
-                trailingIcon = {
-                    if (isEmailError) {
-                        Icon(
-                            imageVector = Icons.Default.Error,
-                            contentDescription = "Error",
-                            tint = MaterialTheme.colorScheme.error
-                        )
-                    }
-                },
-                supportingText = {
-                    if (isEmailError) {
-                        Text(
-                            text = "Email must be at least 3 characters",
-                            color = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.End
-                        )
-                    }
-                }
-            )
-            //Password field
-            OutlinedTextField(
-                value = password,
-                onValueChange = {
-                    password = it
-                },
-                modifier = Modifier
-                    .fillMaxWidth(),
-                label = {
-                    Text(
-                        text = stringResource(R.string.your_password),
-                        style = MaterialTheme.typography.labelSmall
-                    )
-                },
-                shape = RoundedCornerShape(16.dp),
-                colors = OutlinedTextFieldDefaults.
-                colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
-                    unfocusedTextColor = MaterialTheme.colorScheme.onBackground
-                ),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Lock,
-                        contentDescription = stringResource(R.string.lock_icon),
-                        tint = MaterialTheme.colorScheme.secondary
-
-                    )
-                },
-                isError = isPasswordError,
-                trailingIcon = {
-                    if (isPasswordError) {
-                        Icon(
-                            imageVector = Icons.Default.Error,
-                            contentDescription = "Error",
-                            tint = MaterialTheme.colorScheme.error
-                        )
-                    }
-                },
-                supportingText = {
-                    if (isPasswordError) {
-                        Text(
-                            text = "Password must be at least 3 characters",
-                            color = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.End
-                        )
-                    }
-                }
-            )
-            Spacer(modifier = Modifier.padding(32.dp))
-            Button(
-                onClick = {
-                    if (validate()) {
-                        userRepository.saveUser(
-                            User(
-                                name = name,
-                                email = email,
-                                password = password,
-                                userImage = convertBitmapToByteArray(profileImage)
-                            )
-                        )
-                        showDialogSuccess = true
-                    } else {
-                        showDialogError = true
-                    }
-
-                },
-                modifier = Modifier
-                    .fillMaxWidth(),
-                colors = ButtonDefaults
-                    .buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    ),
-                border = BorderStroke(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.onSurface
-                ),
-
-                ) {
+                .fillMaxWidth(),
+            label = {
                 Text(
-                    text = stringResource(R.string.create_a_new_account),
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    style = MaterialTheme.typography.bodySmall
+                    text = stringResource(R.string.your_name),
+                    style = MaterialTheme.typography.labelSmall
                 )
+            },
+            shape = RoundedCornerShape(16.dp),
+            colors = OutlinedTextFieldDefaults.
+            colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedTextColor = MaterialTheme.colorScheme.onBackground
+            ),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = stringResource(R.string.person_icon),
+                    tint = MaterialTheme.colorScheme.secondary
+
+                )
+            },
+            isError = isNameError,
+            trailingIcon = {
+                if (isNameError) {
+                    Icon(
+                        imageVector = Icons.Default.Error,
+                        contentDescription = "Error",
+                        tint = MaterialTheme.colorScheme.error
+                    )
+                }
+            },
+            supportingText = {
+                if (isNameError) {
+                    Text(
+                        text = "Name must be at least 3 characters",
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.End
+                    )
+                }
             }
-        }
-        if(showDialogSuccess) {
-            AlertDialog(
-                onDismissRequest = {
-                    showDialogError = false
-                },
-                title = {
-                    Text(text = "Success")
-                },
-                text = {
-                    Text(text = "User created successfully")
-                },
-                confirmButton = {
-                    TextButton(
-                        onClick = {
-                            showDialogSuccess = false
-                            navController.navigate(Destination.LoginScreen.route)
-                        }
-                    ) {
-                        Text(text = "OK")
-                    }
+        )
+        // user email
+        OutlinedTextField(
+            value = email,
+            onValueChange = {
+                email = it
+            },
+            modifier = Modifier
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = stringResource(R.string.your_email),
+                    style = MaterialTheme.typography.labelSmall
+                )
+            },
+            shape = RoundedCornerShape(16.dp),
+            colors = OutlinedTextFieldDefaults.
+            colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedTextColor = MaterialTheme.colorScheme.onBackground
+            ),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Mail,
+                    contentDescription = stringResource(R.string.email_icon),
+                    tint = MaterialTheme.colorScheme.secondary
+
+                )
+            },
+            isError = isEmailError,
+            trailingIcon = {
+                if (isEmailError) {
+                    Icon(
+                        imageVector = Icons.Default.Error,
+                        contentDescription = "Error",
+                        tint = MaterialTheme.colorScheme.error
+                    )
+                }
+            },
+            supportingText = {
+                if (isEmailError) {
+                    Text(
+                        text = "Email must be at least 3 characters",
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.End
+                    )
+                }
+            }
+        )
+        //Password field
+        OutlinedTextField(
+            value = password,
+            onValueChange = {
+                password = it
+            },
+            modifier = Modifier
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = stringResource(R.string.your_password),
+                    style = MaterialTheme.typography.labelSmall
+                )
+            },
+            shape = RoundedCornerShape(16.dp),
+            colors = OutlinedTextFieldDefaults.
+            colors(
+                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedTextColor = MaterialTheme.colorScheme.onBackground
+            ),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = stringResource(R.string.lock_icon),
+                    tint = MaterialTheme.colorScheme.secondary
+
+                )
+            },
+            isError = isPasswordError,
+            trailingIcon = {
+                if (isPasswordError) {
+                    Icon(
+                        imageVector = Icons.Default.Error,
+                        contentDescription = "Error",
+                        tint = MaterialTheme.colorScheme.error
+                    )
+                }
+            },
+            supportingText = {
+                if (isPasswordError) {
+                    Text(
+                        text = "Password must be at least 3 characters",
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.End
+                    )
+                }
+            }
+        )
+        Spacer(modifier = Modifier.padding(32.dp))
+        Button(
+            onClick = {
+                if (validate()) {
+                    userRepository.saveUser(
+                        User(
+                            name = name,
+                            email = email,
+                            password = password,
+                            userImage = convertBitmapToByteArray(profileImage)
+                        )
+                    )
+                    showDialogSuccess = true
+                } else {
+                    showDialogError = true
                 }
 
+            },
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = ButtonDefaults
+                .buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                ),
+            border = BorderStroke(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.onSurface
+            ),
+
+            ) {
+            Text(
+                text = stringResource(R.string.create_a_new_account),
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.bodySmall
             )
         }
-
-        if (showDialogError) {
-            AlertDialog(
-                onDismissRequest = {
-                    showDialogError = false
-
-                },
-                title = {
-                    Text(text = "Error")
-                },
-                text = {
-                    Text(text = "Please fill in all fields")
-                },
-                confirmButton = {
-                    TextButton(
-                        onClick= {
-                            showDialogError = false
-                        }
-                    ) {
-                        Text(text = "OK")
+    }
+    if(showDialogSuccess) {
+        AlertDialog(
+            onDismissRequest = {
+                showDialogError = false
+            },
+            title = {
+                Text(text = "Success")
+            },
+            text = {
+                Text(text = "User created successfully")
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showDialogSuccess = false
+                        navController.navigate(Destination.LoginScreen.route)
                     }
+                ) {
+                    Text(text = "OK")
                 }
-            )
-        }
+            }
 
+        )
+    }
+
+    if (showDialogError) {
+        AlertDialog(
+            onDismissRequest = {
+                showDialogError = false
+
+            },
+            title = {
+                Text(text = "Error")
+            },
+            text = {
+                Text(text = "Please fill in all fields")
+            },
+            confirmButton = {
+                TextButton(
+                    onClick= {
+                        showDialogError = false
+                    }
+                ) {
+                    Text(text = "OK")
+                }
+            }
+        )
+    }
 }
