@@ -50,6 +50,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.navigation.Destination
+import com.example.kotlinfiap.repository.RoomUserRepository
 import com.example.kotlinfiap.repository.SharedPreferencesUserRepository
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
@@ -140,7 +141,7 @@ fun LogInForm(navController: NavController) {
     }
 
     val userRepository =
-        SharedPreferencesUserRepository(context = LocalContext.current)
+        RoomUserRepository(context = LocalContext.current)
 
 
     Column() {

@@ -1,5 +1,6 @@
 package com.example.kotlinfiap.screens
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -38,9 +39,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -55,11 +61,13 @@ import com.example.kotlinfiap.R
 import com.example.kotlinfiap.components.CategoryItem
 import com.example.kotlinfiap.components.ReviewItem
 import com.example.kotlinfiap.navigation.Destination
+import com.example.kotlinfiap.repository.RoomUserRepository
 import com.example.kotlinfiap.repository.SharedPreferencesUserRepository
 import com.example.kotlinfiap.repository.UserRepository
 import com.example.kotlinfiap.repository.getAllCategories
 import com.example.kotlinfiap.repository.getAllReviews
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
+import com.example.kotlinfiap.utils.convertByteArrayToBitmap
 
 @Composable
 fun HomeScreen(navController: NavController, email: String?) {
@@ -108,9 +116,16 @@ private fun HomeScreenPreview() {
 @Composable
 fun MyTopAppBar(email: String) {
     val userRepository: UserRepository =
-        SharedPreferencesUserRepository(context = LocalContext.current)
+        RoomUserRepository(context = LocalContext.current)
 
-    val user = userRepository.getUser()
+
+    val user = userRepository.getUserByEmail(email)
+
+    var profileBitmap by remember {
+        mutableStateOf<Bitmap>(
+            convertByteArrayToBitmap(user!!.userImage!!)
+        )
+    }
 
     TopAppBar(
         modifier = Modifier
@@ -127,7 +142,7 @@ fun MyTopAppBar(email: String) {
             ) {
                 Column() {
                     Text(
-                        text = "Hello, ${user.name}",
+                        text = "Hello, ${user!!.name}",
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
@@ -150,7 +165,7 @@ fun MyTopAppBar(email: String) {
                     )
                 ) {
                     Image(
-                        painter = painterResource(R.drawable.profile),
+                        bitmap = profileBitmap.asImageBitmap(),
                         contentDescription = "User image"
                     )
                 }
