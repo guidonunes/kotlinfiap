@@ -67,7 +67,3 @@ fun NavigationRoutes() {
     }
 }
 
-@Composable
-fun ProfileScreen(x0: NavHostController) {
-    TODO("Not yet implemented")
-}

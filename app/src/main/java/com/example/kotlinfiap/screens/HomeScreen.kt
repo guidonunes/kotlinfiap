@@ -3,6 +3,7 @@ package com.example.kotlinfiap.screens
 import android.graphics.Bitmap
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -76,7 +77,7 @@ fun HomeScreen(navController: NavController, email: String?) {
             .fillMaxSize()
     ) {
         Scaffold(
-            topBar = {MyTopAppBar(email!!)},
+            topBar = {MyTopAppBar(email!!, navController)},
             bottomBar = {MyBottomAppBar()},
             floatingActionButton = {
                 FloatingActionButton(
@@ -114,7 +115,7 @@ private fun HomeScreenPreview() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTopAppBar(email: String) {
+fun MyTopAppBar(email: String = "", navController: NavController) {
     val userRepository: UserRepository =
         RoomUserRepository(context = LocalContext.current)
 
@@ -153,6 +154,14 @@ fun MyTopAppBar(email: String) {
                     )
                 }
                 Card(
+                    modifier = Modifier
+                        .size(52.dp)
+                        .clickable (
+                            onClick = {
+                                navController.navigate(route = "profile")
+                            }
+                        ),
+
                     shape = CircleShape,
                     colors = CardDefaults
                         .cardColors(
@@ -181,7 +190,7 @@ fun MyTopAppBar(email: String) {
 @Composable
 private fun MyTopAppBarPreview() {
     KotlinfiapTheme() {
-        MyTopAppBar("")
+        MyTopAppBar("", rememberNavController())
     }
 }
 
