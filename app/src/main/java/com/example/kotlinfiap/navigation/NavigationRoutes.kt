@@ -12,6 +12,7 @@ import com.example.kotlinfiap.screens.HomeScreen
 import com.example.kotlinfiap.screens.InitialScreen
 import com.example.kotlinfiap.screens.LoginScreen
 import com.example.kotlinfiap.screens.SignUpScreen
+import com.example.kotlinfiap.screens.ProfileScreen
 import com.example.kotlinfiap.screens.ReviewCategoryScreen
 
 @Composable
@@ -43,6 +44,11 @@ fun NavigationRoutes() {
         composable(Destination.SignUpScreen.route) {
             SignUpScreen(navController)
         }
+
+        composable(Destination.ProfileScreen.route) {
+            ProfileScreen(navController)
+        }
+
         composable(Destination.LoginScreen.route) {
             LoginScreen(navController)
         }
@@ -59,4 +65,9 @@ fun NavigationRoutes() {
             ReviewCategoryScreen(categoryId, navController)
         }
     }
+}
+
+@Composable
+fun ProfileScreen(x0: NavHostController) {
+    TODO("Not yet implemented")
 }

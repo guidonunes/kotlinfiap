@@ -3,6 +3,7 @@ package com.example.kotlinfiap.navigation
 sealed class Destination(val route: String) {
     object InitialScreen: Destination("initial")
     object SignUpScreen: Destination("signup")
+    object ProfileScreen: Destination("profile")
     object HomeScreen: Destination("home/{email}") {
         fun createRoute(email: String): String {
             return "home/$email"
