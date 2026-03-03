@@ -1,8 +1,6 @@
 package com.example.kotlinfiap.model
 
-import androidx.annotation.DrawableRes
-import androidx.compose.ui.graphics.Color
-import com.example.kotlinfiap.R
+
 import com.google.gson.annotations.SerializedName
 
 data class Category(
