@@ -29,4 +29,9 @@
     <string name="profile">Profile</string>
     <string name="user_data_information">User Data Information</string>
     <string name="update_profile">Update Profile</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="delete_account_dialog">Delete Account</string>
+    <string name="are_you_sure_you_want_to_delete_your_account">Are you sure you want to delete your account?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
 </resources>

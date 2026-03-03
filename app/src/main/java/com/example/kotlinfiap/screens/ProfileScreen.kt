@@ -211,7 +211,9 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
         return !isNameError && !isEmailError && !isPasswordError
     }
 
-
+    var showDeleteDialog by remember {
+        mutableStateOf(false)
+    }
 //    val userRepository = SharedPreferencesUserRepository(context = LocalContext.current)
 
 
@@ -408,7 +410,81 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
                 style = MaterialTheme.typography.bodySmall
             )
         }
+
+        Button(
+            onClick = {
+                if (validate()) {
+                    val updatedRows = userRepository.update(
+                        User(
+                            id = user!!.id,
+                            name = name,
+                            email = email,
+                            password = password,
+                            userImage = convertBitmapToByteArray(profileImage)
+                        )
+                    )
+                    showDialogSuccess = updatedRows > 0
+                    showDialogError = updatedRows == 0
+                } else {
+                    showDialogError = true
+                }
+
+            },
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = ButtonDefaults
+                .buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary
+                ),
+            border = BorderStroke(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.onSurface
+            ),
+
+            ) {
+            Text(
+                text = stringResource(R.string.delete_account),
+                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
     }
+
+    if(showDeleteDialog != false) {
+        AlertDialog(
+            onDismissRequest = {
+                showDeleteDialog = false
+            },
+            title = {
+                Text(text = stringResource(R.string.delete_account_dialog))
+            },
+            text = {
+                Text(text = stringResource(R.string.are_you_sure_you_want_to_delete_your_account))
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showDeleteDialog = false
+                    }
+                ) {
+                    Text(text = stringResource(R.string.yes))
+                }
+
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showDeleteDialog = false
+                    }
+                ) {
+                    Text(text = stringResource(R.string.cancel))
+                }
+            }
+
+        )
+    }
+
+
     if(showDialogSuccess) {
         AlertDialog(
             onDismissRequest = {
