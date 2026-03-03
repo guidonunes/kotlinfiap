@@ -32,4 +32,9 @@ class RoomUserRepository(context: Context): UserRepository {
     override fun update(user: User): Int {
         return reviewDatabase.update(user)
     }
+
+    override fun delete(user: User): Int {
+        return reviewDatabase.delete(user)
+    }
+
 }

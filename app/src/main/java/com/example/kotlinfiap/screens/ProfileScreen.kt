@@ -465,6 +465,10 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
                 TextButton(
                     onClick = {
                         showDeleteDialog = false
+                        if(user != null) {
+                            userRepository.delete(user)
+                            navController.navigate(Destination.LoginScreen.route)
+                        }
                     }
                 ) {
                     Text(text = stringResource(R.string.yes))
