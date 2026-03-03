@@ -390,7 +390,6 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
                 } else {
                     showDialogError = true
                 }
-
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -413,22 +412,7 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
 
         Button(
             onClick = {
-                if (validate()) {
-                    val updatedRows = userRepository.update(
-                        User(
-                            id = user!!.id,
-                            name = name,
-                            email = email,
-                            password = password,
-                            userImage = convertBitmapToByteArray(profileImage)
-                        )
-                    )
-                    showDialogSuccess = updatedRows > 0
-                    showDialogError = updatedRows == 0
-                } else {
-                    showDialogError = true
-                }
-
+                showDeleteDialog = true
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -450,7 +434,7 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
         }
     }
 
-    if(showDeleteDialog != false) {
+    if(showDeleteDialog) {
         AlertDialog(
             onDismissRequest = {
                 showDeleteDialog = false
@@ -504,7 +488,7 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
                 TextButton(
                     onClick = {
                         showDialogSuccess = false
-                        navController.navigate(Destination.LoginScreen.route)
+                        navController.navigate(Destination.HomeScreen.route)
                     }
                 ) {
                     Text(text = "OK")
