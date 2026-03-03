@@ -39,4 +39,8 @@ class SharedPreferencesUserRepository(context: Context): UserRepository {
         val passwordPrefs = userPrefs.getString("password", "")
         return true
     }
+
+    override fun update(user: User): Int {
+        TODO("Not yet implemented")
+    }
 }

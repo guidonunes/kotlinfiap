@@ -28,4 +28,8 @@ class RoomUserRepository(context: Context): UserRepository {
         val user = reviewDatabase.login(email, password)
         return user != null
     }
+
+    override fun update(user: User): Int {
+        return reviewDatabase.update(user)
+    }
 }

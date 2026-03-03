@@ -212,12 +212,7 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
     }
 
 
-
-
 //    val userRepository = SharedPreferencesUserRepository(context = LocalContext.current)
-
-
-
 
 
     Column(
@@ -381,6 +376,7 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
                 if (validate()) {
                     userRepository.saveUser(
                         User(
+                            id = user!!.id,
                             name = name,
                             email = email,
                             password = password,
