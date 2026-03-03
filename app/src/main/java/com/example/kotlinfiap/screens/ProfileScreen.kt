@@ -374,7 +374,7 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
         Button(
             onClick = {
                 if (validate()) {
-                    userRepository.saveUser(
+                    val updatedRows = userRepository.update(
                         User(
                             id = user!!.id,
                             name = name,
@@ -383,7 +383,8 @@ fun ProfileUserForm(navController: NavController, profileImage: Bitmap, userEmai
                             userImage = convertBitmapToByteArray(profileImage)
                         )
                     )
-                    showDialogSuccess = true
+                    showDialogSuccess = updatedRows > 0
+                    showDialogError = updatedRows == 0
                 } else {
                     showDialogError = true
                 }
