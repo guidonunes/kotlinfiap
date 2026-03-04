@@ -1,6 +1,7 @@
 package com.example.kotlinfiap.model
 
 import androidx.annotation.DrawableRes
+import com.google.gson.annotations.SerializedName
 import java.time.LocalDate
 
 data class Review(
@@ -8,9 +9,9 @@ data class Review(
     val category: Category,
     val user: User,
     val difficultyLevel: DifficultyLevel,
-    val name: String = "",
+    @SerializedName("title") val name: String = "",
     val description: String="",
-    val campaignLength: Int=0,
+    @SerializedName("cookingTime") val campaignLength: Int=0,
     val createdAt: LocalDate = LocalDate.now(),
-    @get:DrawableRes val image: Int
+    @SerializedName("url") val image: String = ""
 )
