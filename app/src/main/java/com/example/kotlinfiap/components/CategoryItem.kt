@@ -23,7 +23,8 @@ import com.example.kotlinfiap.model.Category
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
-fun CategoryItem(category: Category = Category(),
+fun CategoryItem(
+    category: Category = Category(),
                  onClick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
