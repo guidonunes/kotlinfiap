@@ -44,8 +44,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.components.ReviewItem
+import com.example.kotlinfiap.factory.RetrofitClient
 import com.example.kotlinfiap.model.Review
 import com.example.kotlinfiap.navigation.Destination
 import com.example.kotlinfiap.repository.getAllReviews
@@ -56,6 +58,8 @@ import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 @Composable
 fun ReviewCategoryScreen(categoryId: Int?, navController: NavHostController?) {
 
+
+
     val reviewsByCategory = getReviewsByCategory(
         id = categoryId!!
     )
@@ -64,7 +68,8 @@ fun ReviewCategoryScreen(categoryId: Int?, navController: NavHostController?) {
 
     when (reviewsByCategory.size) {
         0 -> {
-            categoryName = getCategoryById(categoryId)!!.name
+           categoryName = ""
+//            getCategoryById(categoryId)!!.name
         }
 
         else -> {
@@ -181,6 +186,8 @@ fun ReviewCategoryScreen(categoryId: Int?, navController: NavHostController?) {
 
 @Composable
 fun CategoryReview(review: Review) {
+    val baseurl = RetrofitClient.BASE_URL.plus("reviews")
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -195,8 +202,8 @@ fun CategoryReview(review: Review) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            Image(
-                painter = painterResource(review.image!!),
+            AsyncImage(
+                model = baseurl.plus(review.image),
                 contentDescription = "",
                 modifier = Modifier
                     .weight(1f)

@@ -1,6 +1,7 @@
 package com.example.kotlinfiap.factory
 
 import com.example.kotlinfiap.service.CategoryService
+import com.example.kotlinfiap.service.ReviewService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -16,5 +17,9 @@ object RetrofitClient {
 
     fun getCategoryService(): CategoryService {
         return retrofit.create(CategoryService::class.java)
+    }
+
+    fun getReviewService(): ReviewService {
+        return retrofit.create(ReviewService::class.java)
     }
 }

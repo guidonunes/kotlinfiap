@@ -27,12 +27,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.example.kotlinfiap.factory.RetrofitClient
 import com.example.kotlinfiap.model.Review
 import com.example.kotlinfiap.repository.getAllReviews
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 
 @Composable
 fun ReviewItem(review: Review) {
+    val baseurl = RetrofitClient.BASE_URL.plus("reviews")
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -42,12 +46,18 @@ fun ReviewItem(review: Review) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            Image(
-                painter = painterResource(review.image!!),
+            AsyncImage(
+                model = baseurl.plus(review.image),
                 contentDescription = "",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
+//            Image(
+//                painter = painterResource(review.image!!),
+//                contentDescription = "",
+//                modifier = Modifier.fillMaxSize(),
+//                contentScale = ContentScale.Crop
+//            )
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
