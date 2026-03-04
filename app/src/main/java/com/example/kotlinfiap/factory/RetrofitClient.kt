@@ -1,5 +1,6 @@
 package com.example.kotlinfiap.factory
 
+import com.example.kotlinfiap.service.CategoryService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -11,5 +12,9 @@ object RetrofitClient {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    fun getCategoryService(): CategoryService {
+        return retrofit.create(CategoryService::class.java)
     }
 }
