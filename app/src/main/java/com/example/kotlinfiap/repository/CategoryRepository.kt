@@ -17,7 +17,6 @@ import retrofit2.Response
 fun getAllCategories(): List<Category> {
     var categories by remember {
         mutableStateOf(listOf<Category>())
-
     }
     val callCategories = RetrofitClient.getCategoryService().getAllCategories()
 
@@ -85,5 +84,6 @@ fun getAllCategories(): List<Category> {
 //    )
 //)
 
-//fun getCategoryById(id: Int) = getAllCategories()
-//    .firstOrNull { it.id == id }
+@Composable
+fun getCategoryById(id: Int) = getAllCategories()
+    .firstOrNull { it.id == id }
