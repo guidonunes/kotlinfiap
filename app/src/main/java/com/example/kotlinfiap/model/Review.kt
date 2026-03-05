@@ -8,7 +8,7 @@ data class Review(
     val id: Int = 0,
     val category: Category,
     val user: User,
-    val difficultyLevel: DifficultyLevel,
+    val difficultyLevel: DifficultyLevel?,
     @SerializedName("title") val name: String = "",
     val description: String="",
     @SerializedName("cookingTime") val campaignLength: Int=0,

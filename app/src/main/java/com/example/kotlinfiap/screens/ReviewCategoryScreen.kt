@@ -248,7 +248,7 @@ fun CategoryReview(review: Review) {
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = review.difficultyLevel.description,
+                            text = review.difficultyLevel?.description ?: "N/A",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.tertiary
                         )
