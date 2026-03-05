@@ -63,10 +63,10 @@ import com.example.kotlinfiap.components.CategoryItem
 import com.example.kotlinfiap.components.ReviewItem
 import com.example.kotlinfiap.navigation.Destination
 import com.example.kotlinfiap.repository.RoomUserRepository
-import com.example.kotlinfiap.repository.SharedPreferencesUserRepository
 import com.example.kotlinfiap.repository.UserRepository
 import com.example.kotlinfiap.repository.getAllCategories
 import com.example.kotlinfiap.repository.getAllReviews
+import com.example.kotlinfiap.repository.getLatestReviews
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 import com.example.kotlinfiap.utils.convertByteArrayToBitmap
 
@@ -250,7 +250,7 @@ private fun MyBottomAppBarPreview() {
 fun ContentScreen(modifier: Modifier = Modifier,
                   navController: NavController) {
     val categories = getAllCategories()
-    val reviews = getAllReviews()
+    val latestReviews = getLatestReviews()
 
     Column(
         modifier = modifier
@@ -334,7 +334,7 @@ fun ContentScreen(modifier: Modifier = Modifier,
             contentPadding = PaddingValues(vertical = 8.dp,horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(reviews) { review ->
+            items(latestReviews) { review ->
                 ReviewItem(review)
             }
         }

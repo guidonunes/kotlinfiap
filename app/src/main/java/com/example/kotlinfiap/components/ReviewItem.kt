@@ -71,7 +71,7 @@ fun ReviewItem(review: Review) {
                     )
             ) {
                 Text(
-                    text = review.user.name,
+                    text = "User Name",
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier.padding(top = 8.dp, start = 8.dp)
