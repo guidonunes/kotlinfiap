@@ -9,4 +9,10 @@ interface ReviewService {
     //http://localhost:8080/api/reviews/categories/5
     @GET("reviews/categories/{categoryId}")
     fun getRecipesByCatergory(@Path("categoryId")id: Int): Call<List<Review>>
+
+    @GET("reviews/recents")
+    fun getLatestRecipes(): Call<List<Review>>
+
+
+
 }
