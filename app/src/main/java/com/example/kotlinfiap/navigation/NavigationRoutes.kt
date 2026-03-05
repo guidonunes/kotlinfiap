@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
+import com.example.kotlinfiap.screens.AddReviewScreen
 import com.example.kotlinfiap.screens.HomeScreen
 import com.example.kotlinfiap.screens.InitialScreen
 import com.example.kotlinfiap.screens.LoginScreen
@@ -71,6 +72,10 @@ fun NavigationRoutes() {
         ) {
             val categoryId = it.arguments?.getInt("categoryId")
             ReviewCategoryScreen(categoryId, navController)
+        }
+
+        composable(Destination.AddReviewScreen.route) {
+            AddReviewScreen(navController)
         }
     }
 }

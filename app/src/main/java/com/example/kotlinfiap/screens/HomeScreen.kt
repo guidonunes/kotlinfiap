@@ -81,7 +81,9 @@ fun HomeScreen(navController: NavController, email: String?) {
             bottomBar = {MyBottomAppBar()},
             floatingActionButton = {
                 FloatingActionButton(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(Destination.AddReviewScreen.route)
+                    },
                     shape = CircleShape,
                     containerColor = MaterialTheme.colorScheme.primary
                 ) {
