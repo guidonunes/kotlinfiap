@@ -1,8 +1,11 @@
 package com.example.kotlinfiap.service
 
 import com.example.kotlinfiap.model.Review
+import com.example.kotlinfiap.model.ReviewRequest
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ReviewService {
@@ -13,6 +16,8 @@ interface ReviewService {
     @GET("reviews/recents")
     fun getLatestRecipes(): Call<List<Review>>
 
+    @POST("reviews")
+    fun saveReview(@Body reviewRequest: ReviewRequest): Call<ReviewRequest>
 
 
 }

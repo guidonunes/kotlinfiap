@@ -11,6 +11,7 @@ import com.example.kotlinfiap.factory.RetrofitClient
 import com.example.kotlinfiap.model.Category
 import com.example.kotlinfiap.model.DifficultyLevel
 import com.example.kotlinfiap.model.Review
+import com.example.kotlinfiap.model.ReviewRequest
 import com.example.kotlinfiap.model.User
 import retrofit2.Call
 import retrofit2.Callback
@@ -119,6 +120,30 @@ fun getLatestReviews(): List<Review> {
     })
     return latestReviews
 }
+
+fun saveReview(reviewRequest: ReviewRequest): ReviewRequest? {
+    var newReview: ReviewRequest? = ReviewRequest()
+    val callNewReview = RetrofitClient.getReviewService().saveReview(reviewRequest)
+
+    callNewReview.enqueue(object: Callback<ReviewRequest>{
+        override fun onResponse(
+            p0: Call<ReviewRequest>?,
+            response: Response<ReviewRequest>?
+        ) {
+            newReview = response?.body() ?: null
+        }
+
+        override fun onFailure(
+            p0: Call<ReviewRequest>?,
+            p1: Throwable?
+        ) {
+            println("Error: ${p1?.message}")
+        }
+    })
+
+    return newReview
+}
+
 
 //fun getReviewsByCategory(id: Int) = getAllReviews()
 //    .filter{ review ->
