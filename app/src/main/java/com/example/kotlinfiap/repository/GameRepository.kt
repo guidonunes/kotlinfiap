@@ -91,6 +91,35 @@ fun getReviewsByCategory(id: Int): List<Review> {
     return reviews
 }
 
+@Composable
+fun getLatestReviews(): List<Review> {
+    var latestReviews by remember {
+        mutableStateOf(listOf<Review>())
+    }
+    val callLatestReviews = RetrofitClient.getReviewService().getLatestRecipes()
+
+    callLatestReviews.enqueue(object: Callback<List<Review>> {
+        override fun onResponse(
+            p0: Call<List<Review>?>?,
+            response: Response<List<Review>?>?
+        ) {
+            latestReviews = response?.body() ?: emptyList()
+
+        }
+
+        override fun onFailure(
+            p0: Call<List<Review>?>?,
+            p1: Throwable?
+
+        ) {
+
+            println("Error: ${p1?.message}")
+        }
+
+    })
+    return latestReviews
+}
+
 //fun getReviewsByCategory(id: Int) = getAllReviews()
 //    .filter{ review ->
 //        review.category.id == id
