@@ -121,26 +121,8 @@ fun getLatestReviews(): List<Review> {
     return latestReviews
 }
 
-fun saveReview(reviewRequest: ReviewRequest): ReviewRequest? {
-    var newReview: ReviewRequest? = ReviewRequest()
-    val callNewReview = RetrofitClient.getReviewService().saveReview(reviewRequest)
-
-    callNewReview.enqueue(object: Callback<ReviewRequest>{
-        override fun onResponse(
-            p0: Call<ReviewRequest>?,
-            response: Response<ReviewRequest>?
-        ) {
-            newReview = response?.body() ?: null
-        }
-
-        override fun onFailure(
-            p0: Call<ReviewRequest>?,
-            p1: Throwable?
-        ) {
-            println("Error: ${p1?.message}")
-        }
-    })
-
+suspend fun saveReview(reviewRequest: ReviewRequest): ReviewRequest? {
+    val newReview = RetrofitClient.getReviewService().saveReview(reviewRequest)
     return newReview
 }
 

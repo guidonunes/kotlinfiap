@@ -17,7 +17,7 @@ interface ReviewService {
     fun getLatestRecipes(): Call<List<Review>>
 
     @POST("reviews")
-    fun saveReview(@Body reviewRequest: ReviewRequest): Call<ReviewRequest>
+    suspend fun saveReview(@Body reviewRequest: ReviewRequest): ReviewRequest
 
 
 }

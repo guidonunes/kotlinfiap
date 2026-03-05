@@ -40,6 +40,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,9 +53,11 @@ import androidx.navigation.NavHostController
 import com.example.kotlinfiap.model.Category
 import com.example.kotlinfiap.model.DifficultyLevel
 import com.example.kotlinfiap.model.ReviewRequest
+import com.example.kotlinfiap.navigation.Destination
 import com.example.kotlinfiap.repository.getAllCategories
 import com.example.kotlinfiap.repository.saveReview
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -97,6 +100,31 @@ fun AddReviewScreen(navController: NavHostController?) {
     }
     var reviewDescription by remember {
         mutableStateOf("")
+    }
+
+    val scope = rememberCoroutineScope()
+
+    var reviewRequest by remember {
+        mutableStateOf(ReviewRequest())
+    }
+
+    var newReview by remember {
+        mutableStateOf<ReviewRequest?>(null)
+    }
+
+    val saveNewRequest: () -> Unit = {
+        reviewRequest = ReviewRequest(
+            title = reviewTitle,
+            description = reviewDescription,
+            difficultyLevel = difficultyLevel,
+            category = selectedCategory,
+            cookingTime = cookingTime.toInt(),
+            creationDate = LocalDate.now().toString()
+        )
+
+        scope.launch {
+            newReview = saveReview(reviewRequest)
+        }
     }
 
     Box(
@@ -302,7 +330,7 @@ fun AddReviewScreen(navController: NavHostController?) {
                             modifier = Modifier
                                 .height(40.dp)
                                 .selectable(
-                                    selected = difficultyLevel == difficultyLevel,
+                                    selected = difficultyLevel == level,
                                     onClick = { difficultyLevel = level }
                                 )
                         ) {
@@ -368,17 +396,7 @@ fun AddReviewScreen(navController: NavHostController?) {
                 .align(Alignment.BottomStart)
         ){
             TextButton(
-                onClick = {
-                    val reviewRequest = ReviewRequest(
-                        title = reviewTitle,
-                        description = reviewDescription,
-                        difficultyLevel = difficultyLevel,
-                        category = selectedCategory,
-                        cookingTime = cookingTime.toInt(),
-                        creationDate = LocalDate.now().toString()
-                    )
-                    saveReview(reviewRequest)
-                }
+                onClick = saveNewRequest
             ) {
                 Text(
                     text = "NEXT",
