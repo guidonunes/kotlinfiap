@@ -51,8 +51,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.kotlinfiap.model.Category
 import com.example.kotlinfiap.model.DifficultyLevel
+import com.example.kotlinfiap.model.ReviewRequest
 import com.example.kotlinfiap.repository.getAllCategories
+import com.example.kotlinfiap.repository.saveReview
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
+import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,7 +87,7 @@ fun AddReviewScreen(navController: NavHostController?) {
     }
 
 
-    var campaignLength by remember {
+    var cookingTime by remember {
         mutableStateOf(0f)
     }
 
@@ -337,7 +340,7 @@ fun AddReviewScreen(navController: NavHostController?) {
                     )
                 }
                 Text(
-                    text = "${campaignLength.toLong()} h",
+                    text = "${cookingTime.toLong()} h",
                     color = MaterialTheme.colorScheme.onBackground,
                     style = MaterialTheme.typography.titleSmall,
                     fontSize = 22.sp,
@@ -347,9 +350,9 @@ fun AddReviewScreen(navController: NavHostController?) {
                     textAlign = TextAlign.Center
                 )
                 Slider(
-                    value = campaignLength,
+                    value = cookingTime,
                     onValueChange = {
-                        campaignLength = it
+                        cookingTime = it
                     },
                     valueRange = 0f..240f,
                     steps = 0
@@ -365,7 +368,17 @@ fun AddReviewScreen(navController: NavHostController?) {
                 .align(Alignment.BottomStart)
         ){
             TextButton(
-                onClick = {}
+                onClick = {
+                    val reviewRequest = ReviewRequest(
+                        title = reviewTitle,
+                        description = reviewDescription,
+                        difficultyLevel = difficultyLevel,
+                        category = selectedCategory,
+                        cookingTime = cookingTime.toInt(),
+                        creationDate = LocalDate.now().toString()
+                    )
+                    saveReview(reviewRequest)
+                }
             ) {
                 Text(
                     text = "NEXT",
