@@ -121,7 +121,7 @@ fun getLatestReviews(): List<Review> {
     return latestReviews
 }
 
-suspend fun saveReview(reviewRequest: ReviewRequest): ReviewRequest? {
+suspend fun saveReview(reviewRequest: ReviewRequest): ReviewRequest {
     val newReview = RetrofitClient.getReviewService().saveReview(reviewRequest)
     return newReview
 }
