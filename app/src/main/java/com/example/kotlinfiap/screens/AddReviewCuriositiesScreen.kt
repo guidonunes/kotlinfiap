@@ -100,7 +100,7 @@ fun AddReviewCuriositiesScreen(
                     style = MaterialTheme.typography.titleLarge
                 )
                 Text(
-                    text = "In this moment, list all delicious ingredients that you used in your recipe.",
+                    text = "Add some curiosities about the game that caught your attention.",
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(
@@ -152,7 +152,7 @@ fun AddReviewCuriositiesScreen(
                         )
                     },
                     placeholder = {
-                        Text(text = "Describe the ingredient here")
+                        Text(text = "Describe the curiosity here")
                     },
                     trailingIcon = {
                         IconButton(
