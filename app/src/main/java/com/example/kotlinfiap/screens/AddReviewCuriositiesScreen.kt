@@ -270,7 +270,7 @@ fun CuriosityItem(onClick: () -> Unit, curiosity: Curiosity) {
             ) {
                 Icon(
                     imageVector = Icons.Default.Delete,
-                    contentDescription = "Delete ingredient",
+                    contentDescription = "Delete curiosity",
                     tint = MaterialTheme.colorScheme.tertiary,
                 )
             }
