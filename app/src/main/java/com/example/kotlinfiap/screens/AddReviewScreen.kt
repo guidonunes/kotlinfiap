@@ -124,6 +124,13 @@ fun AddReviewScreen(navController: NavHostController?) {
 
         scope.launch {
             newReview = saveReview(reviewRequest)
+            navController!!
+                .navigate(
+                    Destination.AddReviewCuriositiesScreen.createRoute(
+                        newReview!!.id!!,
+                        newReview!!.title
+                    )
+                )
         }
     }
 
