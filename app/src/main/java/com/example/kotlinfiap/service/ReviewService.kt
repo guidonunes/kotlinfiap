@@ -1,6 +1,7 @@
 package com.example.kotlinfiap.service
 
 import com.example.kotlinfiap.model.Category
+import com.example.kotlinfiap.model.ConsoleUsed
 import com.example.kotlinfiap.model.Curiosity
 import com.example.kotlinfiap.model.Review
 import com.example.kotlinfiap.model.ReviewRequest
@@ -25,4 +26,11 @@ interface ReviewService {
             @Path("reviewId") reviewId: Int,
             @Body curiosities: List<Curiosity>
     ): List<Curiosity>
+
+    @POST("reviews/{reviewId}/preparation-methods")
+    suspend fun saveReviewConsoleUsed(
+        @Path("reviewId") reviewId: Int,
+        @Body consoleUsed: List<ConsoleUsed>
+    ): List<ConsoleUsed>
+
 }

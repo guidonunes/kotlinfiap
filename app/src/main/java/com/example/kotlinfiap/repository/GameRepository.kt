@@ -9,6 +9,7 @@ import androidx.compose.runtime.setValue
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.factory.RetrofitClient
 import com.example.kotlinfiap.model.Category
+import com.example.kotlinfiap.model.ConsoleUsed
 import com.example.kotlinfiap.model.Curiosity
 import com.example.kotlinfiap.model.DifficultyLevel
 import com.example.kotlinfiap.model.Review
@@ -149,5 +150,16 @@ suspend fun saveReviewCuriosities(
     }
 }
 
-
+suspend fun saveReviewConsoleUsed(
+    reviewId: Int,
+    consoleUsed: List<ConsoleUsed>
+): List<ConsoleUsed> {
+    val newConsoleUsed = RetrofitClient
+        .getReviewService()
+        .saveReviewConsoleUsed(
+            reviewId = reviewId,
+            consoleUsed = consoleUsed
+        )
+    return newConsoleUsed
+}
 
