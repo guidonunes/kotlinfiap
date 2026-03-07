@@ -71,6 +71,8 @@ fun AddReviewCuriositiesScreen(
         mutableIntStateOf(0)
     }
 
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
