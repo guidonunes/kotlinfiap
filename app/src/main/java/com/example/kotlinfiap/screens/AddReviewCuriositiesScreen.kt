@@ -89,17 +89,19 @@ fun AddReviewCuriositiesScreen(
             }
             val result = saveReviewCuriosities(
                 reviewId = reviewId!!,
-                curiosities = curiositiesToSend
-            )
+                curiosities = curiositiesToSend)
 
             if (result.isNotEmpty() || curiositiesToSend.isEmpty()) {
-                Toast.makeText(context, "Review saved successfully!", Toast.LENGTH_SHORT).show()
-                // Navigate back to home or a success screen
-                navController?.navigate(Destination.HomeScreen.createRoute("user@example.com")) {
-                    popUpTo(Destination.InitialScreen.route) { inclusive = false }
-                }
+                Toast.makeText(context, "Curiosities saved successfully!", Toast.LENGTH_SHORT).show()
+                
+                navController?.navigate(
+                    Destination.AddReviewConsoleUsedScreen.createRoute(
+                        reviewId = reviewId,
+                        reviewTitle = reviewTitle.toString()
+                    )
+                )
             } else {
-                Toast.makeText(context, "Error saving curiosities (404 Not Found)", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Error saving curiosities", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -241,13 +243,13 @@ fun AddReviewCuriositiesScreen(
                     onClick = saveNewCuriosities
                 ) {
                     Text(
-                        text = "FINISH",
+                        text = "NEXT",
                         style = MaterialTheme.typography.titleSmall,
                         fontSize = 28.sp
                     )
                     Icon(
                         imageVector = Icons.Default.ArrowForward,
-                        contentDescription = "Finish button"
+                        contentDescription = "Next button"
                     )
                 }
             }
@@ -273,7 +275,7 @@ fun CuriosityItem(onClick: () -> Unit, curiosity: Curiosity) {
         Row(
             modifier = Modifier
                 .padding(8.dp)
-                .fillMaxSize(),
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
