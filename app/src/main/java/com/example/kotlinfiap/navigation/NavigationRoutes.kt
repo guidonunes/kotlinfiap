@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
+import com.example.kotlinfiap.screens.AddReviewConsoleUsedScreen
 import com.example.kotlinfiap.screens.AddReviewCuriositiesScreen
 import com.example.kotlinfiap.screens.AddReviewScreen
 import com.example.kotlinfiap.screens.HomeScreen
@@ -97,6 +98,27 @@ fun NavigationRoutes() {
                 reviewId,
                 reviewTitle
             )
+        }
+
+        composable(
+            route = Destination.AddReviewConsoleUsedScreen.route,
+            arguments = listOf(
+                navArgument(
+                    name = "reviewId"
+                ) { type = NavType.IntType },
+                navArgument(
+                    name = "reviewTitle"
+                ) { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val reviewId = backStackEntry.arguments?.getInt("reviewId")
+            val reviewTitle = backStackEntry.arguments?.getString("reviewTitle")
+            AddReviewConsoleUsedScreen(
+                navController,
+                reviewId,
+                reviewTitle
+            )
+
         }
     }
 }

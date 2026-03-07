@@ -33,4 +33,15 @@ sealed class Destination(val route: String) {
             return "addCuriosities/$reviewId/$reviewTitle"
         }
     }
+
+    object AddReviewConsoleUsedScreen: Destination(
+        route = "addConsoleUsed/{reviewId}/{reviewTitle}"
+    ) {
+        fun createRoute(
+            reviewId: Int,
+            reviewTitle: String
+        ): String {
+            return "addConsoleUsed/$reviewId/$reviewTitle"
+        }
+    }
 }
