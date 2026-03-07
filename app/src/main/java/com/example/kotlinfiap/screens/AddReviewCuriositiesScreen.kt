@@ -84,7 +84,7 @@ fun AddReviewCuriositiesScreen(
         println("saving curiosities...")
         scope.launch {
             val curiositiesToSend = curiosities.map{
-                it.copy(id=null)
+                it.copy(id= null)
             }
             newCuriosities = saveReviewCuriosities(
                 reviewId = reviewId!!,
@@ -92,9 +92,6 @@ fun AddReviewCuriositiesScreen(
             )
         }
     }
-
-
-
 
     Column(
         modifier = Modifier
@@ -229,7 +226,7 @@ fun AddReviewCuriositiesScreen(
                 //.align(Alignment.BottomStart)
             ) {
                 TextButton(
-                    onClick = {}
+                    onClick = saveNewCuriosities
                 ) {
                     Text(
                         text = "NEXT",
