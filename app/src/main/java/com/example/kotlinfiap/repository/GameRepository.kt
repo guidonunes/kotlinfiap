@@ -127,9 +127,18 @@ suspend fun saveReview(reviewRequest: ReviewRequest): ReviewRequest {
 }
 
 
-//fun getReviewsByCategory(id: Int) = getAllReviews()
-//    .filter{ review ->
-//        review.category.id == id
-//    }
+suspend fun saveReviewCuriosities(
+    reviewId: Int,
+    curiosities: List<Category>
+): List<Category> {
+    val newCuriosities = RetrofitClient
+        .getReviewService()
+        .saveReviewCuriosities(
+            reviewId = reviewId,
+            curiosities = curiosities
+        )
+    return newCuriosities
+}
+
 
 
