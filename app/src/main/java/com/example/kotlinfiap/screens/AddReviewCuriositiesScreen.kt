@@ -273,7 +273,9 @@ fun CuriosityItem(onClick: () -> Unit, curiosity: Curiosity) {
                     .weight(2f)
             )
             IconButton(
-                onClick = {}
+                onClick = {
+                    onClick()
+                }
             ) {
                 Icon(
                     imageVector = Icons.Default.Delete,
