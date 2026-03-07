@@ -11,21 +11,18 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ReviewService {
-    //http://localhost:8080/api/reviews/categories/5
     @GET("reviews/categories/{categoryId}")
-    fun getRecipesByCatergory(@Path("categoryId")id: Int): Call<List<Review>>
+    fun getReviewsByCategory(@Path("categoryId")id: Int): Call<List<Review>>
 
     @GET("reviews/recents")
-    fun getLatestRecipes(): Call<List<Review>>
+    fun getLatestReviews(): Call<List<Review>>
 
     @POST("reviews")
     suspend fun saveReview(@Body reviewRequest: ReviewRequest): ReviewRequest
 
-    @POST("reviews/{reviewId}/curiosities")
+    @POST("reviews/{reviewId}/ingredients")
     suspend fun saveReviewCuriosities(
             @Path("reviewId") reviewId: Int,
             @Body curiosities: List<Curiosity>
-    ): List<Category>
+    ): List<Curiosity>
 }
-
-

@@ -1,6 +1,7 @@
 package com.example.kotlinfiap.screens
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -77,8 +78,8 @@ fun HomeScreen(navController: NavController, email: String?) {
             .fillMaxSize()
     ) {
         Scaffold(
-            topBar = {MyTopAppBar(email!!, navController)},
-            bottomBar = {MyBottomAppBar()},
+            topBar = { MyTopAppBar(email ?: "", navController) },
+            bottomBar = { MyBottomAppBar() },
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = {
@@ -94,7 +95,7 @@ fun HomeScreen(navController: NavController, email: String?) {
                 }
             },
 
-        ) { paddingValues ->
+            ) { paddingValues ->
             Column(
                 modifier = Modifier
                     .padding(paddingValues)
@@ -118,15 +119,17 @@ private fun HomeScreenPreview() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTopAppBar(email: String = "", navController: NavController) {
+    val context = LocalContext.current
     val userRepository: UserRepository =
-        RoomUserRepository(context = LocalContext.current)
+        RoomUserRepository(context = context)
 
 
     val user = userRepository.getUserByEmail(email)
 
-    var profileBitmap by remember {
-        mutableStateOf<Bitmap>(
-            convertByteArrayToBitmap(user!!.userImage!!)
+    val profileBitmap = remember(user?.userImage) {
+        user?.userImage?.let { convertByteArrayToBitmap(it) } ?: BitmapFactory.decodeResource(
+            context.resources,
+            R.drawable.profile
         )
     }
 
@@ -145,7 +148,7 @@ fun MyTopAppBar(email: String = "", navController: NavController) {
             ) {
                 Column() {
                     Text(
-                        text = "Hello, ${user!!.name}",
+                        text = "Hello, ${user?.name ?: "User"}",
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
@@ -158,7 +161,7 @@ fun MyTopAppBar(email: String = "", navController: NavController) {
                 Card(
                     modifier = Modifier
                         .size(52.dp)
-                        .clickable (
+                        .clickable(
                             onClick = {
                                 navController.navigate(
                                     Destination
@@ -229,9 +232,10 @@ fun MyBottomAppBar(modifier: Modifier = Modifier) {
                     )
                 },
                 label = {
-                    Text(text = item.title,
-                         style = MaterialTheme.typography.displaySmall,
-                         color = MaterialTheme.colorScheme.onTertiary
+                    Text(
+                        text = item.title,
+                        style = MaterialTheme.typography.displaySmall,
+                        color = MaterialTheme.colorScheme.onTertiary
                     )
                 }
             )
@@ -249,8 +253,10 @@ private fun MyBottomAppBarPreview() {
 }
 
 @Composable
-fun ContentScreen(modifier: Modifier = Modifier,
-                  navController: NavController) {
+fun ContentScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     val categories = getAllCategories()
     val latestReviews = getLatestReviews()
 
@@ -272,8 +278,7 @@ fun ContentScreen(modifier: Modifier = Modifier,
                 )
             },
             shape = RoundedCornerShape(16.dp),
-            colors = OutlinedTextFieldDefaults.
-            colors(
+            colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.onBackground,
                 focusedTextColor = MaterialTheme.colorScheme.primary,
@@ -315,8 +320,8 @@ fun ContentScreen(modifier: Modifier = Modifier,
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(categories) {category ->
-                CategoryItem(category =category, onClick = {
+            items(categories) { category ->
+                CategoryItem(category = category, onClick = {
                     navController.navigate(
                         route = Destination.ReviewCategoryScreen
                             .createRoute(category.id)
@@ -333,7 +338,7 @@ fun ContentScreen(modifier: Modifier = Modifier,
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         )
         LazyColumn(
-            contentPadding = PaddingValues(vertical = 8.dp,horizontal = 16.dp),
+            contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(latestReviews) { review ->

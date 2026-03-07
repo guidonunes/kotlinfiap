@@ -71,7 +71,7 @@ fun getReviewsByCategory(id: Int): List<Review> {
         mutableStateOf(listOf<Review>())
     }
 
-    val callReviewsByCategory = RetrofitClient.getReviewService().getRecipesByCatergory(id)
+    val callReviewsByCategory = RetrofitClient.getReviewService().getReviewsByCategory(id)
 
     callReviewsByCategory.enqueue(object: Callback<List<Review>> {
         override fun onResponse(
@@ -98,7 +98,7 @@ fun getLatestReviews(): List<Review> {
     var latestReviews by remember {
         mutableStateOf(listOf<Review>())
     }
-    val callLatestReviews = RetrofitClient.getReviewService().getLatestRecipes()
+    val callLatestReviews = RetrofitClient.getReviewService().getLatestReviews()
 
     callLatestReviews.enqueue(object: Callback<List<Review>> {
         override fun onResponse(
@@ -122,9 +122,13 @@ fun getLatestReviews(): List<Review> {
     return latestReviews
 }
 
-suspend fun saveReview(reviewRequest: ReviewRequest): ReviewRequest {
-    val newReview = RetrofitClient.getReviewService().saveReview(reviewRequest)
-    return newReview
+suspend fun saveReview(reviewRequest: ReviewRequest): ReviewRequest? {
+    return try {
+        RetrofitClient.getReviewService().saveReview(reviewRequest)
+    } catch (e: Exception) {
+        println("Error: ${e.message}")
+        null
+    }
 }
 
 
@@ -132,13 +136,17 @@ suspend fun saveReviewCuriosities(
     reviewId: Int,
     curiosities: List<Curiosity>
 ): List<Curiosity> {
-    val newCuriosities = RetrofitClient
-        .getReviewService()
-        .saveReviewCuriosities(
-            reviewId = reviewId,
-            curiosities = curiosities
-        )
-    return newCuriosities
+    return try {
+        RetrofitClient
+            .getReviewService()
+            .saveReviewCuriosities(
+                reviewId = reviewId,
+                curiosities = curiosities
+            )
+    } catch (e: Exception) {
+        println("Error: ${e.message}")
+        emptyList()
+    }
 }
 
 

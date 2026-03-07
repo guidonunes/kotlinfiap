@@ -1,6 +1,7 @@
 package com.example.kotlinfiap.screens
 
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -45,11 +46,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.kotlinfiap.model.Curiosity
+import com.example.kotlinfiap.navigation.Destination
 import com.example.kotlinfiap.repository.saveReviewCuriosities
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
 import kotlinx.coroutines.launch
@@ -61,6 +64,8 @@ fun AddReviewCuriositiesScreen(
     reviewId: Int?,
     reviewTitle: String?
 ) {
+
+    val context = LocalContext.current
 
     var curiosities = remember {
         mutableStateListOf<Curiosity>()
@@ -76,20 +81,26 @@ fun AddReviewCuriositiesScreen(
 
     val scope = rememberCoroutineScope()
 
-    var newCuriosities: List<Curiosity> by remember {
-        mutableStateOf(listOf())
-    }
-
     val saveNewCuriosities: () -> Unit = {
         println("saving curiosities...")
         scope.launch {
             val curiositiesToSend = curiosities.map{
                 it.copy(id= null)
             }
-            newCuriosities = saveReviewCuriosities(
+            val result = saveReviewCuriosities(
                 reviewId = reviewId!!,
                 curiosities = curiositiesToSend
             )
+
+            if (result.isNotEmpty() || curiositiesToSend.isEmpty()) {
+                Toast.makeText(context, "Review saved successfully!", Toast.LENGTH_SHORT).show()
+                // Navigate back to home or a success screen
+                navController?.navigate(Destination.HomeScreen.createRoute("user@example.com")) {
+                    popUpTo(Destination.InitialScreen.route) { inclusive = false }
+                }
+            } else {
+                Toast.makeText(context, "Error saving curiosities (404 Not Found)", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -181,6 +192,7 @@ fun AddReviewCuriositiesScreen(
                             onClick = {
                                 curiosityNumber = curiosities.size + 1
                                 curiosities.add(Curiosity(curiosityNumber, curiosity))
+                                curiosity = "" // Clear input after adding
                             }
                         ) {
                             Icon(
@@ -229,13 +241,13 @@ fun AddReviewCuriositiesScreen(
                     onClick = saveNewCuriosities
                 ) {
                     Text(
-                        text = "NEXT",
+                        text = "FINISH",
                         style = MaterialTheme.typography.titleSmall,
                         fontSize = 28.sp
                     )
                     Icon(
                         imageVector = Icons.Default.ArrowForward,
-                        contentDescription = "Next button"
+                        contentDescription = "Finish button"
                     )
                 }
             }

@@ -2,6 +2,8 @@ package com.example.kotlinfiap.screens
 
 
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -45,6 +47,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -63,6 +66,8 @@ import java.time.LocalDate
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddReviewScreen(navController: NavHostController?) {
+
+    val context = LocalContext.current
 
     // Obter lista de categorias da API
     var categories = getAllCategories()
@@ -123,14 +128,23 @@ fun AddReviewScreen(navController: NavHostController?) {
         )
 
         scope.launch {
-            newReview = saveReview(reviewRequest)
-            navController!!
-                .navigate(
-                    Destination.AddReviewCuriositiesScreen.createRoute(
-                        newReview!!.id!!,
-                        newReview!!.title
-                    )
-                )
+            try {
+                newReview = saveReview(reviewRequest)
+                if (newReview != null) {
+                    navController!!
+                        .navigate(
+                            Destination.AddReviewCuriositiesScreen.createRoute(
+                                newReview!!.id!!,
+                                newReview!!.title
+                            )
+                        )
+                } else {
+                    Toast.makeText(context, "Error saving review (404 Not Found)", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e("AddReviewScreen", "Error: ${e.message}")
+                Toast.makeText(context, "An unexpected error occurred", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
