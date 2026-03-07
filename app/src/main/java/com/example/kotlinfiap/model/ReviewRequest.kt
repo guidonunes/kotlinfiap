@@ -1,7 +1,7 @@
 package com.example.kotlinfiap.model
 
 data class ReviewRequest(
-    val id: Int? = 0,
+    val id: Int? = null,
     val title: String = "",
     val difficultyLevel: DifficultyLevel = DifficultyLevel.EASY,
     val description: String = "",

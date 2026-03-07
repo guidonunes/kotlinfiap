@@ -182,7 +182,14 @@ fun AddReviewCuriositiesScreen(
                 LazyColumn {
                     items(curiosities) { curiosity ->
                         CuriosityItem(
-                            onClick = {},
+                            onClick = {
+                                curiosities.remove(curiosity)
+                                val reorderedList = curiosities.mapIndexed {index, item ->
+                                    item.copy(id = index + 1)
+                                }
+                                curiosities.clear()
+                                curiosities.addAll(reorderedList)
+                            },
                             curiosity
                         )
                     }

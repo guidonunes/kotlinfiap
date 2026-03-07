@@ -24,7 +24,7 @@ sealed class Destination(val route: String) {
     }
 
     object AddReviewCuriositiesScreen: Destination(
-        route = "addReviewCuriositiesScreen/{reviewId}/{reviewTitle}"
+        route = "addCuriosities/{reviewId}/{reviewTitle}"
     ) {
         fun createRoute(
             reviewId: Int,
