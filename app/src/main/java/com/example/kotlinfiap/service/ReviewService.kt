@@ -5,10 +5,13 @@ import com.example.kotlinfiap.model.ConsoleUsed
 import com.example.kotlinfiap.model.Curiosity
 import com.example.kotlinfiap.model.Review
 import com.example.kotlinfiap.model.ReviewRequest
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ReviewService {
@@ -32,5 +35,12 @@ interface ReviewService {
         @Path("reviewId") reviewId: Int,
         @Body consoleUsed: List<ConsoleUsed>
     ): List<ConsoleUsed>
+
+    @Multipart
+    @POST("reviews/{reviewId}/upload-image")
+    suspend fun uploadImage(
+        @Path("reviewId") reviewId: Int,
+        @Part file: MultipartBody.Part
+    ): Review
 
 }
