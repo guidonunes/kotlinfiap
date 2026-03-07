@@ -9,6 +9,7 @@ import androidx.compose.runtime.setValue
 import com.example.kotlinfiap.R
 import com.example.kotlinfiap.factory.RetrofitClient
 import com.example.kotlinfiap.model.Category
+import com.example.kotlinfiap.model.Curiosity
 import com.example.kotlinfiap.model.DifficultyLevel
 import com.example.kotlinfiap.model.Review
 import com.example.kotlinfiap.model.ReviewRequest
@@ -129,8 +130,8 @@ suspend fun saveReview(reviewRequest: ReviewRequest): ReviewRequest {
 
 suspend fun saveReviewCuriosities(
     reviewId: Int,
-    curiosities: List<Category>
-): List<Category> {
+    curiosities: List<Curiosity>
+): List<Curiosity> {
     val newCuriosities = RetrofitClient
         .getReviewService()
         .saveReviewCuriosities(

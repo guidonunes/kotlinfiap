@@ -1,6 +1,7 @@
 package com.example.kotlinfiap.service
 
 import com.example.kotlinfiap.model.Category
+import com.example.kotlinfiap.model.Curiosity
 import com.example.kotlinfiap.model.Review
 import com.example.kotlinfiap.model.ReviewRequest
 import retrofit2.Call
@@ -23,7 +24,7 @@ interface ReviewService {
     @POST("reviews/{reviewId}/curiosities")
     suspend fun saveReviewCuriosities(
             @Path("reviewId") reviewId: Int,
-            @Body curiosities: List<Category>
+            @Body curiosities: List<Curiosity>
     ): List<Category>
 }
 

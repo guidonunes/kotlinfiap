@@ -40,6 +40,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,7 +50,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.kotlinfiap.model.Curiosity
+import com.example.kotlinfiap.repository.saveReviewCuriosities
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -70,6 +73,26 @@ fun AddReviewCuriositiesScreen(
     var curiosityNumber by remember {
         mutableIntStateOf(0)
     }
+
+    val scope = rememberCoroutineScope()
+
+    var newCuriosities: List<Curiosity> by remember {
+        mutableStateOf(listOf())
+    }
+
+    val saveNewCuriosities: () -> Unit = {
+        println("saving curiosities...")
+        scope.launch {
+            val curiositiesToSend = curiosities.map{
+                it.copy(id=null)
+            }
+            newCuriosities = saveReviewCuriosities(
+                reviewId = reviewId!!,
+                curiosities = curiositiesToSend
+            )
+        }
+    }
+
 
 
 
