@@ -1,5 +1,6 @@
 package com.example.kotlinfiap.screens
 
+import android.content.Context
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -123,6 +124,8 @@ private fun LogInTitlePreview() {
 @Composable
 fun LogInForm(navController: NavController) {
 
+    val context = LocalContext.current
+
     var email by remember {
         mutableStateOf("")
 
@@ -237,6 +240,12 @@ fun LogInForm(navController: NavController) {
             onClick = {
                 val authenticate = userRepository.login(email, password)
                 if (authenticate) {
+                    val sharedPreferences = context
+                        .getSharedPreferences("user_data", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("email", email)
+                    editor.apply()
+
                     navController
                         .navigate(
                             Destination.HomeScreen.createRoute(email)

@@ -1,5 +1,6 @@
 package com.example.kotlinfiap.screens
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.BorderStroke
@@ -123,8 +124,16 @@ fun MyTopAppBar(email: String = "", navController: NavController) {
     val userRepository: UserRepository =
         RoomUserRepository(context = context)
 
+    val sharedPreferences = context
+        .getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
-    val user = userRepository.getUserByEmail(email)
+    val emailSharedPreferences = sharedPreferences
+        .getString("email", "")
+
+
+
+
+    val user = userRepository.getUserByEmail(emailSharedPreferences!!)
 
     val profileBitmap = remember(user?.userImage) {
         user?.userImage?.let { convertByteArrayToBitmap(it) } ?: BitmapFactory.decodeResource(
