@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.kotlinfiap.model.ConsoleUsed
+import com.example.kotlinfiap.navigation.Destination
 
 import com.example.kotlinfiap.repository.saveReviewConsoleUsed
 import com.example.kotlinfiap.ui.theme.KotlinfiapTheme
@@ -91,6 +92,9 @@ fun AddReviewConsoleUsedScreen(
             newMethods = saveReviewConsoleUsed(
                 reviewId = reviewId!!,
                 consoleUsed = methodsToSend
+            )
+            navController?.navigate(
+                Destination.AddReviewPhotoScreen.createRoute(reviewId ?: 0)
             )
         }
     }

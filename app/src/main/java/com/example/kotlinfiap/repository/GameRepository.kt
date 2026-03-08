@@ -15,9 +15,12 @@ import com.example.kotlinfiap.model.DifficultyLevel
 import com.example.kotlinfiap.model.Review
 import com.example.kotlinfiap.model.ReviewRequest
 import com.example.kotlinfiap.model.User
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.time.LocalDate
 
 fun getAllReviews() = listOf<Review>(
@@ -161,5 +164,15 @@ suspend fun saveReviewConsoleUsed(
             consoleUsed = consoleUsed
         )
     return newConsoleUsed
+}
+
+suspend fun uploadImage(reviewId: Int, file: File) {
+    val image = MultipartBody.Part
+        .createFormData(
+            name = "file",
+            filename = file.name,
+            body = file.asRequestBody()
+        )
+    RetrofitClient.getReviewService().uploadImage(reviewId, file = image)
 }
 

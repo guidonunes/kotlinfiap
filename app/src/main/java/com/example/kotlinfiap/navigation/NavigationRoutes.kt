@@ -17,6 +17,7 @@ import com.example.kotlinfiap.screens.LoginScreen
 import com.example.kotlinfiap.screens.SignUpScreen
 import com.example.kotlinfiap.screens.ProfileScreen
 import com.example.kotlinfiap.screens.ReviewCategoryScreen
+import com.example.kotlinfiap.screens.AddReviewPhotoScreen
 
 @Composable
 fun NavigationRoutes() {
@@ -120,6 +121,15 @@ fun NavigationRoutes() {
             )
 
         }
+
+        composable(
+            route = Destination.AddReviewPhotoScreen.route,
+            arguments = listOf(
+                navArgument("reviewId") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+            val reviewId = backStackEntry.arguments?.getInt("reviewId") ?: 0
+            AddReviewPhotoScreen(reviewId, navController)
+        }
     }
 }
-
